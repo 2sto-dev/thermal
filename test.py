@@ -19,7 +19,15 @@ PASSWORD = "egoqwedc/12"  # 🔹 Actualizează cu parola corectă
 def save_tokens(access, refresh, username):
     """Salvează tokenurile și utilizatorul asociat într-un fișier JSON."""
     with open(TOKEN_FILE, "w") as f:
-        json.dump({"access": access, "refresh": refresh, "username": username, "timestamp": time.time()}, f)
+        json.dump(
+            {
+                "access": access,
+                "refresh": refresh,
+                "username": username,
+                "timestamp": time.time(),
+            },
+            f,
+        )
 
 
 def load_tokens():
@@ -31,12 +39,14 @@ def load_tokens():
     try:
         with open(TOKEN_FILE, "r") as f:
             tokens = json.load(f)
-        
+
         # Verificăm dacă utilizatorul curent este cel pentru care s-a salvat tokenul
         if tokens.get("username") != USERNAME:
-            print(f"[⚠] Tokenurile sunt pentru alt utilizator ({tokens.get('username')}). Obținere token nou...")
+            print(
+                f"[⚠] Tokenurile sunt pentru alt utilizator ({tokens.get('username')}). Obținere token nou..."
+            )
             return get_new_tokens()
-        
+
         return tokens
     except (json.JSONDecodeError, FileNotFoundError):
         print("[⚠] `tokens.json` este corupt. Generare tokenuri noi...")
@@ -122,7 +132,9 @@ def get_solicitari():
             print(f"Număr solicitare: {solicitare['nr_solicit']}")
             print(f"Data solicitării: {format_date(solicitare['data_solicit'])}")
             print(f"Data programării: {format_date(solicitare['data_program'])}")
-            print(f"Ora programării: {solicitare['ora_program'][:5]}")  # Elimină secunde
+            print(
+                f"Ora programării: {solicitare['ora_program'][:5]}"
+            )  # Elimină secunde
             print(f"Operator: {solicitare['operator']}")
             print("---------------------\n")
     else:
@@ -133,7 +145,10 @@ def add_solicitare():
     """Adaugă o solicitare nouă."""
     tokens = ensure_valid_token()
     access_token = tokens.get("access")
-    headers = {"Authorization": f"Bearer {access_token}", "Content-Type": "application/json"}
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json",
+    }
 
     print("\n[📌] Introdu datele pentru solicitare:")
     nume = input("Nume Beneficiar: ").strip().upper()

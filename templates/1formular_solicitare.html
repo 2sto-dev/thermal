@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formular Solicitare</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Formular Solicitare</h1>
+    <input type="text" id="nume" placeholder="Introdu numele" autocomplete="off">
+    <button id="verifica_nume">Verifică</button>
+
+    <!-- Pop-up Modal -->
+    <div id="popup-form" style="display:none; border: 1px solid black; padding: 20px; background: #f9f9f9;">
+        <h2>Nume necunoscut. Adaugă detaliile:</h2>
+        <input type="text" id="popup_nume" placeholder="Nume">
+        <input type="text" id="popup_prenume" placeholder="Prenume">
+        <input type="text" id="popup_telefon" placeholder="Telefon">
+        <input type="text" id="popup_tip_client" placeholder="Tip Client">
+        <button id="submit_form">Adaugă Solicitare</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#verifica_nume').click(function() {
+                var nume = $('#nume').val();
+                $.ajax({
+                    url: "{% url 'cauta_beneficiar' %}",
+                    data: {
+                        'nume': nume
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.nou) {
+                            $('#popup_nume').val(nume);
+                            $('#popup-form').show();
+                        }
+                    }
+                });
+            });
+
+            $('#submit_form').click(function() {
+                var nume = $('#popup_nume').val();
+                var prenume = $('#popup_prenume').val();
+                var telefon = $('#popup_telefon').val();
+                var tip_client = $('#popup_tip_client').val();
+
+                $.ajax({
+                    url: "{% url 'adauga_solicitare' %}",
+                    type: 'POST',
+                    data: {
+                        'nume': nume,
+                        'prenume': prenume,
+                        'telefon': telefon,
+                        'tip_client': tip_client,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            alert("Solicitarea a fost adăugată!");
+                            $('#popup-form').hide();
+                            $('#nume').val('');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

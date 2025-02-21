@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete Formular</title>
+    <!-- Include Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Formular Beneficiar</h1>
+    <form id="beneficiarForm">
+        <label for="id_beneficiar">Beneficiar:</label>
+        <select id="id_beneficiar" name="beneficiar">
+            <option value="">Selectează un beneficiar</option>
+            {% for beneficiar in beneficiari %}
+                <option value="{{ beneficiar.id }}">{{ beneficiar.nume }} {{ beneficiar.prenume }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="id_nume">Nume:</label>
+        <input type="text" id="id_nume" name="nume" readonly>
+
+        <label for="id_prenume">Prenume:</label>
+        <input type="text" id="id_prenume" name="prenume" readonly>
+
+        <label for="id_telefon">Telefon:</label>
+        <input type="text" id="id_telefon" name="telefon" readonly>
+
+        <label for="id_tip_client">Tip Client:</label>
+        <input type="text" id="id_tip_client" name="tip_client" readonly>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("✅ JavaScript încărcat!");
+
+            // Selectează câmpul beneficiar
+            const beneficiarField = document.querySelector("#id_beneficiar");
+            console.log("🛠️ Câmp beneficiar:", beneficiarField);
+
+            // Verifică dacă câmpul beneficiar există
+            if (!beneficiarField) {
+                console.error("❌ Câmpul beneficiar NU a fost găsit!");
+                return;
+            }
+
+            console.log("✅ Câmp beneficiar detectat!");
+
+            // Selectează câmpurile care trebuie completate automat
+            const numeField = document.querySelector("#id_nume");
+            const prenumeField = document.querySelector("#id_prenume");
+            const telefonField = document.querySelector("#id_telefon");
+            const tipClientField = document.querySelector("#id_tip_client");
+
+            // Verifică dacă toate câmpurile necesare există
+            const câmpuriNecesare = { numeField, prenumeField, telefonField, tipClientField };
+            let toateCâmpurileExistă = true;
+
+            for (const [numeCâmp, câmp] of Object.entries(câmpuriNecesare)) {
+                if (!câmp) {
+                    console.error(`❌ Câmpul ${numeCâmp} NU a fost găsit!`);
+                    toateCâmpurileExistă = false;
+                }
+            }
+
+            if (!toateCâmpurileExistă) {
+                console.error("❌ Unul sau mai multe câmpuri lipsesc!");
+                return;
+            }
+
+            console.log("✅ Toate câmpurile necesare sunt prezente!");
+
+            // Adaugă evenimentul `change` la câmpul beneficiar
+            let previousBeneficiarId = null;
+
+            beneficiarField.addEventListener("change", async function () {
+                console.log("🎯 Eveniment change declanșat!");
+
+                const beneficiarId = beneficiarField.value;
+                console.log("🎯 ID Beneficiar selectat:", beneficiarId);
+
+                // Verifică dacă a fost selectat un beneficiar
+                if (!beneficiarId) {
+                    console.warn("⚠️ Niciun beneficiar selectat!");
+                    return;
+                }
+
+                // Verifică dacă valoarea s-a schimbat
+                if (beneficiarId === previousBeneficiarId) {
+                    console.warn("⚠️ Aceeași valoare selectată, evenimentul nu se declanșează.");
+                    return;
+                }
+
+                previousBeneficiarId = beneficiarId;
+
+                try {
+                    console.log(`🔗 Pornim cererea Axios pentru beneficiar ID: ${beneficiarId}`);
+                    const url = `/api/get_beneficiar/${beneficiarId}/`;
+                    console.log("🛠️ URL cerere Axios:", url);
+
+                    // Folosește Axios pentru a face cererea HTTP
+                    const response = await axios.get(url);
+                    console.log("📦 Răspuns de la API:", response);
+
+                    // Extrage datele din răspuns
+                    const data = response.data;
+                    console.log("📦 Date primite de la API:", data);
+
+                    // Debug: Afișează structura datelor primite
+                    console.log("🛠️ Structura datelor:", {
+                        nume: data.nume,
+                        prenume: data.prenume,
+                        telefon: data.telefon,
+                        tip_client: data.tip_client,
+                    });
+
+                    // Completează câmpurile cu datele primite
+                    numeField.value = data.nume || "";
+                    prenumeField.value = data.prenume || "";
+                    telefonField.value = data.telefon || "";
+                    tipClientField.value = data.tip_client || "";
+
+                    console.log("✅ Câmpurile au fost completate automat!");
+                } catch (error) {
+                    console.error("❌ Eroare Axios:", error);
+
+                    // Resetează câmpurile în caz de eroare
+                    numeField.value = "";
+                    prenumeField.value = "";
+                    telefonField.value = "";
+                    tipClientField.value = "";
+
+                    console.warn("⚠️ Câmpurile au fost resetate din cauza unei erori.");
+                }
+            });
+
+            // Debug: Verifică dacă evenimentul a fost atașat cu succes
+            console.log("🛠️ Evenimentul 'change' a fost atașat la câmpul beneficiar.");
+        });
+    </script>
+</body>
+</html>

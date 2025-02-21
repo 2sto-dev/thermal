@@ -1,0 +1,39 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <!-- Overlay pentru pop-up -->
+    <div id="modal_overlay_manual" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999;"></div>
+
+    <!-- Modal pentru adăugare manuală -->
+    <div id="modal_adauga_manual" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:20px; border-radius:8px; z-index:1000; box-shadow: 0px 0px 15px rgba(0,0,0,0.3); width: 300px;">
+        <h3>Adaugă Client Nou</h3>
+        <label for="modal_nume">Nume:</label>
+        <input type="text" id="modal_nume" style="width:100%; margin-bottom:10px;" />
+        
+        <label for="modal_prenume">Prenume:</label>
+        <input type="text" id="modal_prenume" style="width:100%; margin-bottom:10px;" />
+        
+        <label for="modal_telefon">Telefon:</label>
+        <input type="text" id="modal_telefon" style="width:100%; margin-bottom:10px;" />
+        
+        <label for="modal_tip_client">Tip Client:</label>
+        <select id="modal_tip_client" style="width:100%; margin-bottom:10px;">
+            <option value="persoana fizica">Persoană Fizică</option>
+            <option value="persoana juridica">Persoană Juridică</option>
+        </select>
+        
+        <button id="salveaza_nume_manual" style="margin-top:10px; padding:5px 10px;">Salvează</button>
+        <button id="inchide_modal_manual" style="margin-top:10px; padding:5px 10px; background: black; color: white;">Închide</button>
+    </div>
+
+    <!-- Mută scripturile aici -->
+    <script src="{% static 'js/autofill_solicitare.js' %}"></script>
+    <script src="{% static 'js/adauga_beneficiar.js' %}"></script>
+
+    {% endblock %}

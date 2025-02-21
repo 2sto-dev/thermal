@@ -1,16 +1,13 @@
-from django.db import models
+from django.contrib import admin
+from django.http import HttpResponseRedirect
+from django.urls import path
+from django.shortcuts import render
+from .models import Beneficiar
+from solicitari.forms import BeneficiarForm
 
 
-class Beneficiar(models.Model):
-    nume = models.CharField(max_length=255, db_index=True)
-    prenume = models.CharField(max_length=255, db_index=True)
-    telefon = models.CharField(max_length=15, db_index=True)
-    tip_client = models.CharField(
-        max_length=20,
-        choices=[("fizic", "Persoana Fizică"), ("juridic", "Persoana Juridică")],
-        verbose_name="Tip Client",
-    )
-
-    def __str__(self):
-        # Afișează numele complet și telefonul pentru a fi mai clar în autocomplete
-        return f"{self.nume} {self.prenume} ({self.telefon})"
+@admin.register(Beneficiar)
+class BeneficiarAdmin(admin.ModelAdmin):
+    list_display = ("nume", "prenume", "telefon", "tip_client")
+    search_fields = ["nume", "prenume", "telefon", "tip_client"]
+    list_filter = ["tip_client"]

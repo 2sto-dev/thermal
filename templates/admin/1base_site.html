@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+{% load static %}  <!-- 🔹 Asigură-te că aceasta este prezentă -->
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static 'js/autofill_solicitare.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <!-- Continutul paginii tale, care va extinde acest template -->
+
+    <!-- Modal pentru adăugare manuală a beneficiarului -->
+    <div id="modal_adauga_manual" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:20px; border:1px solid black; z-index:1000; box-shadow: 0px 0px 10px rgba(0,0,0,0.3); width: 300px; text-align: center;">
+        <h3>Adaugă beneficiar nou</h3>
+        <input type="text" id="modal_nume" placeholder="Nume" style="display:block; margin:10px auto; padding:5px; width: 80%;">
+        <input type="text" id="modal_prenume" placeholder="Prenume" style="display:block; margin:10px auto; padding:5px; width: 80%;">
+        <input type="text" id="modal_telefon" placeholder="Telefon" style="display:block; margin:10px auto; padding:5px; width: 80%;">
+        <select id="modal_tip_client" style="display:block; margin:10px auto; padding:5px; width: 80%;">
+            <option value="">Selectează tip client</option>
+            <option value="individual">Individual</option>
+            <option value="companie">Companie</option>
+        </select>
+        <button id="salveaza_nume_manual" style="margin-top:10px; padding:5px 10px;">Salvează</button>
+        <button id="inchide_modal_manual" style="margin-top:10px; padding:5px 10px; background: red; color: white;">Închide</button>
+    </div>
+
+    <!-- Overlay pentru modal -->
+    <div id="modal_overlay_manual" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999;"></div>
+{% endblock %}

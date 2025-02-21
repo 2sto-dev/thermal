@@ -17,8 +17,17 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from goGAS import views  # Importă funcția personalizat
+from goGAS.views import custom_login
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("admin/login/", custom_login, name="custom_login"),
+    path("", include("solicitari.urls")),
     path("api/", include("raportare.api.urls")),
+    path("formular/", views.formular_view, name="formular"),
+    path(
+        "solicitari/", include("solicitari.urls")
+    ),  # Include toate rutele din solicitari/urls.py
 ]

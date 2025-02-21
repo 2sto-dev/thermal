@@ -1,0 +1,110 @@
+{% load static %}
+
+<!-- CSS și JS pentru Select2 și Autocomplete Light -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<h2>Formular Solicitare</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="id_nume">Nume:</label>
+    <select id="id_nume" name="nume" style="width: 300px;">
+        <option value="">Selectează un nume...</option>
+    </select>
+
+    <label for="id_prenume">Prenume:</label>
+    <input type="text" id="id_prenume" name="prenume" required>
+
+    <label for="id_telefon">Telefon:</label>
+    <input type="text" id="id_telefon" name="telefon" required>
+
+    <label for="id_tip_client">Tip Client:</label>
+    <select id="id_tip_client" name="tip_client">
+        <option value="Fizic">Fizic</option>
+        <option value="Juridic">Juridic</option>
+    </select>
+
+    <button type="submit">Trimite</button>
+</form>
+
+<!-- Pop-up pentru adăugare manuală -->
+<div id="modal_overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
+
+<div id="modal_adauga" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+    <h3>Adaugă o solicitare nouă</h3>
+    
+    <label>Nume:</label>
+    <input type="text" id="modal_nume" readonly>
+
+    <label>Prenume:</label>
+    <input type="text" id="modal_prenume">
+
+    <label>Telefon:</label>
+    <input type="text" id="modal_telefon">
+
+    <label>Tip Client:</label>
+    <select id="modal_tip_client">
+        <option value="Fizic">Fizic</option>
+        <option value="Juridic">Juridic</option>
+    </select>
+
+    <button id="salveaza_nume">Salvează</button>
+    <button id="inchide_popup">Anulează</button>
+</div>
+
+<script>
+$(document).ready(function() {
+    $("#id_nume").on("select2:select", function(e) {
+        var data = e.params.data;
+
+        $.ajax({
+            url: "/solicitari/beneficiar-details/",
+            type: "GET",
+            data: { nume: data.id },
+            success: function(response) {
+                if (response.nou) {
+                    $("#modal_nume").val(data.text);
+                    $("#modal_adauga, #modal_overlay").fadeIn();
+                } else {
+                    $("#id_prenume").val(response[0].prenume);
+                    $("#id_telefon").val(response[0].telefon);
+                    $("#id_tip_client").val(response[0].tip_client);
+                }
+            }
+        });
+    });
+
+    $("#inchide_popup, #modal_overlay").click(function() {
+        $("#modal_adauga, #modal_overlay").fadeOut();
+    });
+
+    $("#salveaza_nume").click(function() {
+        var nume = $("#modal_nume").val().trim();
+        var prenume = $("#modal_prenume").val().trim();
+        var telefon = $("#modal_telefon").val().trim();
+        var tip_client = $("#modal_tip_client").val();
+
+        $.ajax({
+            url: "/solicitari/adauga-solicitare/",
+            type: "POST",
+            data: {
+                nume: nume,
+                prenume: prenume,
+                telefon: telefon,
+                tip_client: tip_client,
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
+            },
+            success: function(response) {
+                alert(response.message);
+                $("#modal_adauga, #modal_overlay").fadeOut();
+                var newOption = new Option(nume, nume, true, true);
+                $("#id_nume").append(newOption).trigger("change");
+            }
+        });
+    });
+});
+</script>

@@ -1,0 +1,12 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+    <h1>Dashboard Superuser</h1>
+    <p>Aici este un dashboard special doar pentru superuseri.</p>
+
+    <h3>Link-uri rapide:</h3>
+    <ul>
+        <li><a href="{% url 'admin:solicitari_solicitari_changelist' %}">Gestionează Solicitări</a></li>
+        <li><a href="{% url 'admin:beneficiari_beneficiar_changelist' %}">Gestionează Beneficiari</a></li>
+    </ul>
+{% endblock %}
