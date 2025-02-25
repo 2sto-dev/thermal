@@ -25,9 +25,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("admin/login/", custom_login, name="custom_login"),
     path("", include("solicitari.urls")),
+    path("adrese/", include("adrese.urls")),
     path("api/", include("raportare.api.urls")),
     path("formular/", views.formular_view, name="formular"),
     path(
         "solicitari/", include("solicitari.urls")
-    ),  # Include toate rutele din solicitari/urls.py
+    ), 
 ]

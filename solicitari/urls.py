@@ -8,4 +8,7 @@ urlpatterns = [
     path("beneficiar-details/", beneficiar_details, name="beneficiar-details"),
     path("adauga-solicitare/", adauga_solicitare, name="adauga-solicitare"),
     path("adauga-beneficiar/", AdaugaBeneficiar.as_view(), name="adauga_beneficiar"),
+    path("solicitare-details/", beneficiar_details, name="solicitare-details"),
+    
+
 ]

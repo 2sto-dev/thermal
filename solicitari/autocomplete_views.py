@@ -6,8 +6,9 @@ from solicitari.models import Solicitari
 
 class NumeAutocomplete(autocomplete.Select2QuerySetView):
     """
-    Autocomplete pentru căutarea în tabelele Beneficiari și Solicitări.
-    Dacă numele nu este găsit, returnează opțiunea „Adaugă nume nou”.
+    Autocomplete pentru căutarea în tabelele Solicitari și Beneficiari.
+    Se returnează numele și tip_client; dacă nu se găsește niciun rezultat,
+    se returnează doar numele introdus (fără textul 'Adaugă ...').
     """
 
     def get_queryset(self):
@@ -15,24 +16,32 @@ class NumeAutocomplete(autocomplete.Select2QuerySetView):
             return Beneficiar.objects.none()
 
         search_term = self.q or ""
-
         try:
-            # Obține numele din Beneficiari și Solicitări
-            qs_beneficiari = Beneficiar.objects.filter(
-                nume__icontains=search_term
-            ).values_list("nume", flat=True)
-            qs_solicitari = Solicitari.objects.filter(
-                nume__icontains=search_term
-            ).values_list("nume", flat=True)
+            # Obține rezultatele cu câmpurile 'nume' și 'tip_client'
+            qs_solicitari = list(
+                Solicitari.objects.filter(nume__icontains=search_term).values("nume", "tip_client")
+            )
+            qs_beneficiari = list(
+                Beneficiar.objects.filter(nume__icontains=search_term).values("nume", "tip_client")
+            )
 
-            # Elimină duplicate și sortează rezultatele
-            nume_unic = sorted(set(qs_beneficiari) | set(qs_solicitari))
+            # Combină rezultatele
+            combined = qs_solicitari + qs_beneficiari
 
-            results = [{"id": nume, "text": nume} for nume in nume_unic]
+            # Elimină duplicatele pe baza numelui; dacă același nume apare, se păstrează primul tip_client întâlnit
+            results_dict = {}
+            for item in combined:
+                if item["nume"] not in results_dict:
+                    results_dict[item["nume"]] = item["tip_client"]
 
-            # Dacă numele nu există în listă, adaugă opțiunea de creare
-            if not nume_unic and search_term:
-                results.append({"id": "adauga_nume", "text": f"Adaugă '{search_term}'"})
+            results = [
+                {"id": nume, "text": nume, "tip_client": tip_client}
+                for nume, tip_client in results_dict.items()
+            ]
+
+            # Dacă nu s-au găsit rezultate, returnează doar numele introdus
+            if not results and search_term:
+                results.append({"id": search_term, "text": search_term, "tip_client": ""})
 
             return results
 
@@ -41,9 +50,6 @@ class NumeAutocomplete(autocomplete.Select2QuerySetView):
             return []
 
     def render_to_response(self, context, **response_kwargs):
-        """
-        Returnează un răspuns JSON pentru Select2.
-        """
         return JsonResponse(
             {"results": self.get_queryset(), "pagination": {"more": False}}
         )

@@ -1,43 +1,63 @@
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from solicitari.models import Solicitari
 from beneficiari.models import Beneficiar
-from django.shortcuts import render
-from django.views import View
 from django.db import transaction
-from .forms import AdaugaSolicitareForm
-from solicitari.models import Beneficiar
+from django.views import View
+from django.utils.decorators import method_decorator
 
+
+def curata_nume(nume):
+    """
+    Elimină prefixul 'adauga_nume_' dacă există.
+    """
+    print(f"🔹 Nume primit pentru curățare: {nume}")  # Debugging
+    if nume.startswith("adauga_nume_"):
+        nume = nume.replace("adauga_nume_", "").strip()
+    print(f"✅ Nume după curățare: {nume}")  # Debugging
+    return nume
+
+
+@method_decorator(csrf_exempt, name='dispatch')
 class AdaugaBeneficiar(View):
+    """
+    Adaugă un beneficiar în `beneficiari_beneficiar` doar dacă nu există deja.
+    """
     def post(self, request, *args, **kwargs):
-        nume = request.POST.get("nume")
-        prenume = request.POST.get("prenume")
-        telefon = request.POST.get("telefon")
-        tip_client = request.POST.get("tip_client")
+        nume = curata_nume(request.POST.get("nume", "").strip())
+        prenume = request.POST.get("prenume", "").strip()
+        telefon = request.POST.get("telefon", "").strip()
+        tip_client = request.POST.get("tip_client", "").strip()
 
-        if Beneficiar.objects.filter(nume=nume).exists():
-            return JsonResponse({"success": False, "message": "Numele există deja."})
+        print(f"🔹 [AdaugaBeneficiar] Date primite: {nume}, {prenume}, {telefon}, {tip_client}")  # Debugging
+
+        if Beneficiar.objects.filter(nume__iexact=nume, prenume__iexact=prenume).exists():
+            return JsonResponse({"success": False, "message": "Numele există deja ca beneficiar."})
 
         beneficiar = Beneficiar.objects.create(
             nume=nume, prenume=prenume, telefon=telefon, tip_client=tip_client
         )
 
-        return JsonResponse({"success": True, "nume": beneficiar.nume})
-
+        return JsonResponse({"success": True, "message": f"{nume} a fost adăugat cu succes!"})
 
 
 def beneficiar_details(request):
-    nume = request.GET.get("nume")
+    """
+    Verifică dacă numele există în `beneficiari_beneficiar` sau `solicitari_solicitari`.
+    Dacă există, returnează datele beneficiarului sau ale solicitării pentru autofill.
+    """
+    nume = curata_nume(request.GET.get("nume", "").strip())
+
+    print(f"🔹 [beneficiar_details] Nume primit: {nume}")  # Debugging
+
     if not nume:
         return JsonResponse({"error": "Numele este necesar"}, status=400)
 
-    beneficiari = Beneficiar.objects.filter(nume__icontains=nume)
-    solicitari = Solicitari.objects.filter(nume__icontains=nume)
-
-    if not beneficiari.exists() and not solicitari.exists():
-        return JsonResponse({"nou": True, "message": "Numele nu există. Adăugați manual."})
+    beneficiari = Beneficiar.objects.filter(nume__iexact=nume)
+    solicitari = Solicitari.objects.filter(nume__iexact=nume)
 
     rezultate = []
+
     for beneficiar in beneficiari:
         rezultate.append({
             "id": f"b_{beneficiar.id}",
@@ -58,15 +78,77 @@ def beneficiar_details(request):
             "sursa": "solicitare",
         })
 
-    return JsonResponse(rezultate, safe=False)
+    print(f"✅ [beneficiar_details] Rezultate găsite: {rezultate}")  # Debugging
+
+    if len(rezultate) == 1:
+        return JsonResponse(rezultate[0], safe=False)
+
+    if len(rezultate) > 1:
+        return JsonResponse({"multiple": True, "rezultate": rezultate}, safe=False)
+
+    return JsonResponse({"nou": True, "message": "Numele nu există. Adăugați manual."})
 
 
-@csrf_protect
+@csrf_exempt
 def adauga_solicitare(request):
-    if request.method == "POST":
-        form = AdaugaSolicitareForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({"success": True, "message": "Solicitarea a fost adăugată cu succes!"})
-        return JsonResponse({"error": form.errors}, status=400)
-    return JsonResponse({"error": "Metoda trebuie să fie POST!"}, status=405)
+    """
+    Adaugă o solicitare în `solicitari_solicitari` doar dacă nu există deja.
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Metoda trebuie să fie POST!"}, status=405)
+
+    nume = curata_nume(request.POST.get("nume", "").strip())
+    prenume = request.POST.get("prenume", "").strip()
+    telefon = request.POST.get("telefon", "").strip()
+    tip_client = request.POST.get("tip_client", "").strip()
+
+    print(f"🔹 [adauga_solicitare] Date primite: {nume}, {prenume}, {telefon}, {tip_client}")  # Debugging
+
+    if not nume or not prenume or not telefon or not tip_client:
+        return JsonResponse({"error": "Toate câmpurile sunt necesare!"}, status=400)
+
+    tip_client = tip_client.lower()
+    if tip_client in ["persoana fizica", "persoană fizică", "fizic"]:
+        tip_client = "fizic"
+    elif tip_client in ["persoana juridica", "persoană juridică", "juridic"]:
+        tip_client = "juridic"
+    else:
+        return JsonResponse({"error": "Tip client invalid!"}, status=400)
+
+    solicitare_existenta = Solicitari.objects.filter(nume__iexact=nume).first()
+    if solicitare_existenta:
+        return JsonResponse({
+            "success": False,
+            "message": f"Numele {nume} există deja într-o solicitare!",
+            "solicitare": {
+                "nume": solicitare_existenta.nume,
+                "prenume": solicitare_existenta.prenume,
+                "telefon": solicitare_existenta.telefon,
+                "tip_client": solicitare_existenta.tip_client,
+            }
+        })
+
+    try:
+        with transaction.atomic():
+            solicitare_noua = Solicitari.objects.create(
+                nume=nume,
+                prenume=prenume,
+                telefon=telefon,
+                tip_client=tip_client
+            )
+
+        print(f"✅ [adauga_solicitare] Solicitare salvată cu succes: {solicitare_noua}")  # Debugging
+
+        return JsonResponse({
+            "success": True,
+            "message": f"Solicitarea pentru {nume} a fost adăugată cu succes!",
+            "solicitare": {
+                "nume": solicitare_noua.nume,
+                "prenume": solicitare_noua.prenume,
+                "telefon": solicitare_noua.telefon,
+                "tip_client": solicitare_noua.tip_client,
+            },
+        })
+
+    except Exception as e:
+        return JsonResponse({"error": f"Eroare la salvare: {str(e)}"}, status=500)
