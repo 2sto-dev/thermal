@@ -20,6 +20,8 @@ class Solicitari(models.Model):
     
     nr = models.CharField(max_length=10, blank=True, null=True)  # Numărul străzii
     bloc = models.CharField(max_length=10, blank=True, null=True)  # Blocul
+    scara = models.CharField(max_length=10, blank=True, null=True)
+    etaj = models.CharField(max_length=10, blank=True, null=True)
     cod_postal = models.CharField(max_length=20, null=True, blank=True)
 
     tip_client = models.CharField(

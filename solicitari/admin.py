@@ -15,6 +15,9 @@ class SolicitariAdmin(admin.ModelAdmin):
         "judet",
         "localitate",
         "strada",
+        "nr",
+        "scara",
+        "etaj",
         "data_program",
         "producator",
         "rezolvat",
@@ -35,7 +38,7 @@ class SolicitariAdmin(admin.ModelAdmin):
             "classes": ("form-row",),
         }),
         ("BENEFICIAR", {
-            "fields": (("nume", "prenume"), ("telefon", "tip_client"), ("judet", "localitate", "strada")),
+            "fields": (("nume", "prenume"), ("telefon", "tip_client"), ("judet", "localitate", "strada", "nr"), ("bloc", "scara", "etaj")),
             "classes": ("form-row",),
         }),
         ("DETALII TEHNICE", {

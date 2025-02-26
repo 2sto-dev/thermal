@@ -9,36 +9,28 @@ class AdaugaSolicitareForm(forms.ModelForm):
 
 
 class SolicitariForm(forms.ModelForm):
-    nume = forms.CharField(
-        widget=autocomplete.ListSelect2(
-            url="nume-autocomplete",
-            attrs={"data-allow-clear": "true", "data-placeholder": "Selectează sau introdu un nume"},
-        ),
-        required=True,
-    )
-
-    data_solicitare = forms.DateField(required=False, widget=forms.DateInput(attrs={"type": "date"}))
-
-    status_solicitare = forms.CharField(required=False, widget=forms.TextInput(attrs={"readonly": "readonly"}))
-
     class Meta:
         model = Solicitari
         fields = "__all__"
 
-    def clean_nume(self):
-        nume = self.cleaned_data.get("nume").strip()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-        # 🔹 Elimină prefixul `adauga_nume_` dacă există
-        if nume.startswith("adauga_nume_"):
-            nume = nume.replace("adauga_nume_", "").strip()
-
-        # 🔹 NU mai creăm beneficiar aici, doar verificăm dacă există
-        if not Beneficiar.objects.filter(nume__iexact=nume).exists():
-            print(f"⚠️ Numele {nume} NU există în Beneficiari!")  # Debugging
+        if self.instance.pk:
+            # 🔹 Dacă este în Change, facem `nume` editabil ca TextInput
+            self.fields["nume"] = forms.CharField(
+                widget=forms.TextInput(attrs={"class": "form-control"}),
+                required=True,
+            )
         else:
-            print(f"✅ Numele {nume} există deja în Beneficiari.")  # Debugging
-
-        return nume
+            # 🔹 Dacă este în Add, facem `nume` autocomplete
+            self.fields["nume"] = forms.CharField(
+                widget=autocomplete.ListSelect2(
+                    url="nume-autocomplete",
+                    attrs={"data-allow-clear": "true", "data-placeholder": "Selectează sau introdu un nume"},
+                ),
+                required=True,
+            )
 
 
 class BeneficiarForm(forms.ModelForm):
