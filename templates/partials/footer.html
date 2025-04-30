@@ -1,0 +1,112 @@
+<!-- templates/partials/footer.html -->
+<footer class="stats-section text-white pt-5" style="font-family: 'Merriweather', serif;">
+    <div class="container">
+      <div class="row">
+  
+        <!-- Despre Noi -->
+        <div class="col-md-4 mb-4">
+          <h5 class="text-uppercase border-bottom border-warning d-inline-block pb-1">Despre noi</h5>
+          <p class="mt-3">
+            Suntem alături de tine și de familia ta. Asigurăm servicii complete de reparații / service pentru centrale termice.
+          </p>
+          <img src="/media/logo.png" alt="Logo" class="mt-3" style="max-height: 120px;">
+        </div>
+  
+        <!-- Servicii -->
+        <div class="col-md-4 mb-4">
+          <h5 class="text-uppercase border-bottom border-warning d-inline-block pb-1">Servicii</h5>
+          <ul class="list-unstyled mt-3">
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Reparații centrale termice</li>
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Verificare Tehnică Centrale Termice – Autorizație ISCIR</li>
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Punere în Funcțiune Centrală Termică</li>
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Revizii de întreținere centrale termice</li>
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Montare Termostat – Ambient Centrală</li>
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Montare Filtre Protecție</li>
+            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Aer Condiționat</li>
+          </ul>
+        </div>
+  
+        <!-- Contact -->
+        <div class="col-md-4 mb-4">
+          <h5 class="text-uppercase border-bottom border-warning d-inline-block pb-1">Contact</h5>
+          <p class="mt-3 mb-1">
+            <i class="bi bi-telephone-fill text-warning me-2"></i>
+            <a href="tel:0770794240" class="text-white text-decoration-none">0770.794.240</a>
+          </p>
+          <p class="mb-1">
+            <i class="bi bi-envelope-fill text-warning me-2"></i>
+            <a href="mailto:office@bbinstall.ro" class="text-white text-decoration-none">office@bbinstall.ro</a>
+          </p>
+          <p class="mb-1">
+            <i class="bi bi-clock-fill text-warning me-2"></i>Luni-Vineri: 08:30-18:00
+          </p>
+          <hr class="border-light">
+          <p class="mb-1 fw-bold">BB INSTALL ORGANIZATION SRL</p>
+          <p class="mb-1">CUI: 41196126</p>
+          <p class="mb-1">Reg.com: J25/464/2019</p>
+          <p class="mb-1">
+            <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+            Dr.Tr Severin, b-dul Revoluției nr.17, Bl.F4, Sc.1, Ap.1 parter.
+          </p>
+        </div>
+  
+      </div>
+  
+      <!-- Copyright + Social Media -->
+      <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top border-secondary">
+        <p class="mb-0">&copy; 2025 BB Install Organization. Toate drepturile rezervate.</p>
+        <div>
+          <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+          <!-- WhatsApp icon triggers modal -->
+          <a href="#" data-bs-toggle="modal" data-bs-target="#whatsappModal" class="text-white pulse-hover">
+            <i class="bi bi-whatsapp fs-4 text-success"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Modal WhatsApp -->
+  <div class="modal fade" id="whatsappModal" tabindex="-1" aria-labelledby="whatsappModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white border border-success animate__animated animate__zoomIn" style="font-family: 'Merriweather', serif;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="whatsappModalLabel">
+            <i class="bi bi-whatsapp text-success me-2"></i>Contactează-ne pe WhatsApp
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Închide"></button>
+        </div>
+        <div class="modal-body">
+          👋 Salut! Suntem aici să te ajutăm. Trimite-ne un mesaj și revenim rapid cu un răspuns.
+        </div>
+        <div class="modal-footer">
+          <a href="https://wa.me/40770794240?text=Salut!%20Am%20nevoie%20de%20ajutor%20cu%20centrala." target="_blank" class="btn btn-success">
+            Deschide WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Stiluri extra pentru efect hover/pulsare -->
+  <style>
+    .pulse-hover i {
+      transition: transform 0.3s ease, color 0.3s ease;
+      animation: pulseIcon 2s infinite;
+    }
+  
+    .pulse-hover:hover i {
+      transform: scale(1.2);
+      color: #25D366 !important;
+    }
+  
+    @keyframes pulseIcon {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+  </style>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  

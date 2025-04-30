@@ -5,6 +5,19 @@ from beneficiari.models import Beneficiar
 from django.db import transaction
 from django.views import View
 from django.utils.decorators import method_decorator
+from django.shortcuts import render
+
+def home_view(request):
+    return render(request, 'home.html')
+
+def servicii_view(request):
+    return render(request, 'partials/servicii.html')
+
+def contact_view(request):
+    return render(request, 'partials/contact.html')
+
+def centrale_termice_view(request):
+    return render(request, 'partials/centrale_termice.html')
 
 
 def curata_nume(nume):

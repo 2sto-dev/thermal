@@ -1,0 +1,71 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}BBINSTALL{% endblock %}</title>
+
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+</head>
+<body class="bg-light">
+  
+
+  <div class="container-fluid mt-4 px-4">
+   
+  </div>
+
+<div class="container my-5">
+    <h4 class="mb-3">Trimite-ne un mesaj rapid pe WhatsApp</h4>
+  
+    <form id="whatsappForm" onsubmit="return sendToWhatsApp();">
+      <div class="mb-3">
+        <label for="nume" class="form-label">Numele tău</label>
+        <input type="text" class="form-control" id="nume" placeholder="Ex: Andrei Popescu" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="problema" class="form-label">Problema sau tipul centralei</label>
+        <textarea class="form-control" id="problema" rows="3" placeholder="Ex: Centrala Viessmann nu mai pornește..." required></textarea>
+      </div>
+  
+      <button type="submit" class="btn btn-success">
+        <i class="bi bi-whatsapp me-1"></i> Trimite pe WhatsApp
+      </button>
+    </form>
+  </div>
+  <script>
+    function sendToWhatsApp() {
+      const nume = document.getElementById("nume").value.trim();
+      const problema = document.getElementById("problema").value.trim();
+  
+      if (!nume || !problema) {
+        alert("Te rugăm să completezi toate câmpurile.");
+        return false;
+      }
+  
+      const mesaj = `Salut! Mă numesc ${nume} și am următoarea problemă: ${problema}`;
+      const url = `https://wa.me/40770794240?text=${encodeURIComponent(mesaj)}`;
+  
+      window.open(url, '_blank');
+      return false; // prevenim submitul clasic
+    }
+  </script>
+  
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -18,7 +18,11 @@ SECRET_KEY = "django-insecure-b_37lczy0e_*i*0nyw1j9oss3*h0ol#gs(=-2dw2*r=6(&zfsb
 DEBUG = True
 
 # 📌 Permitem accesul din rețea locală
-ALLOWED_HOSTS = ["localhost", "172.16.0.105", "*"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "172.16.0.106", "bbinstall.ro", "86.122.141.95"]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://bbinstall.ro:8888',
+]
 
 # 📌 Aplicațiile instalate
 INSTALLED_APPS = [
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",  # JWT Authentication
     "dal",
     "dal_select2",
+     "django_bootstrap5",
 ]
 
 # 📌 Middleware-uri Django
@@ -132,8 +137,11 @@ INSTALLED_APPS += ["whitenoise.runserver_nostatic"]
 MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 
 # 📌 Configurare fișiere media
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
 
 # 📌 Configurare Django REST Framework și autentificare JWT
 REST_FRAMEWORK = {

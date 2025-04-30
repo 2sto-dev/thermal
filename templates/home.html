@@ -1,0 +1,44 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}BBINSTALL{% endblock %}</title>
+
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+</head>
+<body class="bg-light">
+
+
+  {% include 'partials/navbar.html' %}
+  {% include 'partials/carousel.html' %}
+  {% include 'partials/despre-noi.html' %}
+  {% include 'partials/cards.html' %}
+  {% include 'partials/servicii.html' %}
+  {% include 'partials/portofoliu.html' %}
+  {% include 'partials/producatori.html' %}
+  {% include 'partials/footer.html' %}
+
+  
+
+  <div class="container-fluid mt-4 px-4">
+    {% block content %}{% endblock %}
+  </div>
+
+  <!-- WhatsApp pe mobil -->
+  <a href="https://wa.me/40770794240" class="whatsapp-float" title="Scrie-ne pe WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+  </a>
+
+  {% bootstrap_javascript %}
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

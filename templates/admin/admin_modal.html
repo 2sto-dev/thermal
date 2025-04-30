@@ -1,0 +1,50 @@
+<!-- Buton pentru deschiderea formularului într-un modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#solicitariModal">
+    Adaugă Solicitare
+</button>
+
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="solicitariModal" tabindex="-1" aria-labelledby="solicitariModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="solicitariModalLabel">Adaugă o nouă solicitare</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="solicitariForm">
+                    {% csrf_token %}
+                    {{ form.as_p }}  <!-- Afișează formularul Django cu Bootstrap -->
+                    <button type="submit" class="btn btn-success">Salvează</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script pentru gestionarea formularului cu AJAX -->
+<script>
+document.getElementById("solicitariForm").addEventListener("submit", function(event) {
+    event.preventDefault();  // Previne trimiterea normală a formularului
+
+    let formData = new FormData(this);
+
+    fetch("{% url 'admin:app_solicitari_add' %}", {  // Înlocuiește cu URL-ul corect
+        method: "POST",
+        body: formData,
+        headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Solicitarea a fost adăugată!");
+            window.location.reload();  // Reîncarcă pagina pentru a afișa noua intrare
+        } else {
+            alert("Eroare la adăugare!");
+        }
+    });
+});
+</script>
