@@ -38,12 +38,14 @@ INSTALLED_APPS = [
     "adrese",
     "beneficiari",
     "raportare",
+    "servicii",
     "axios",
     "rest_framework",  # Django REST Framework
     "rest_framework_simplejwt",  # JWT Authentication
     "dal",
     "dal_select2",
-     "django_bootstrap5",
+    "django_bootstrap5",
+    "whitenoise.runserver_nostatic",  # pentru staticfiles în dev
 ]
 
 # 📌 Middleware-uri Django
@@ -61,9 +63,6 @@ MIDDLEWARE = [
 
 # 📌 Configurare URL principal
 ROOT_URLCONF = "goGAS.urls"
-LOGIN_REDIRECT_URL = (
-    "/admin/dashboard/"  # Utilizatorii autentificați sunt trimiși la dashboard
-)
 
 # 📌 Configurare Templates
 TEMPLATES = [
@@ -77,6 +76,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.media",  # pentru MEDIA_URL
             ],
         },
     },
@@ -85,17 +85,15 @@ TEMPLATES = [
 # 📌 Configurare WSGI
 WSGI_APPLICATION = "goGAS.wsgi.application"
 
-# 📌 Configurare baza de date (folosește variabile de mediu pentru parola)
+# 📌 Configurare baza de date
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",  # Motorul bazei de date
-        "NAME": "stargas",  # Numele bazei de date
-        "USER": "root",  # Numele utilizatorului de MySQL
-        "PASSWORD": os.getenv(
-            "DJANGO_DB_PASSWORD", "egoqwedc/12"
-        ),  # Folosește variabilă de mediu
-        "HOST": "localhost",  # Adresa hostului, de obicei 'localhost'
-        "PORT": "3306",  # Portul MySQL, implicit 3306
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "stargas",
+        "USER": "root",
+        "PASSWORD": os.getenv("DJANGO_DB_PASSWORD", "egoqwedc/12"),
+        "HOST": "localhost",
+        "PORT": "3306",
         "OPTIONS": {
             "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
         },
@@ -104,25 +102,14 @@ DATABASES = {
 
 # 📌 Validatori pentru parole
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 # 📌 Configurare limbă și fus orar
-LANGUAGES = [
-    ("ro", "Română"),
-    ("en", "English"),
-]
+LANGUAGES = [("ro", "Română"), ("en", "English")]
 TIME_ZONE = "Europe/Bucharest"
 USE_I18N = True
 USE_TZ = True
@@ -130,18 +117,12 @@ USE_TZ = True
 # 📌 Configurare fișiere statice
 STATIC_URL = "/static/"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATICFILES_DIRS = [BASE_DIR / "static"]  # Asigură-te că `static/` există
+STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-# Servește fișierele statice mai rapid
-INSTALLED_APPS += ["whitenoise.runserver_nostatic"]
-MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 
 # 📌 Configurare fișiere media
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # 📌 Configurare Django REST Framework și autentificare JWT
 REST_FRAMEWORK = {
@@ -149,21 +130,17 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.IsAuthenticated",  # API-ul necesită autentificare
+        "rest_framework.permissions.IsAuthenticated",
     ),
 }
 
 # 📌 Configurare JSON Web Token (JWT)
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),  # 🔹 Tokenul de acces expiră în 1 oră
-    "REFRESH_TOKEN_LIFETIME": timedelta(
-        days=7
-    ),  # 🔹 Refresh token-ul este valid 7 zile
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": True,
 }
 
-# 📌 Redirecționare după login (ex: la Admin solicitari)
-LOGIN_REDIRECT_URL = "/admin/solicitari/"
-
 # 📌 Tip implicit pentru cheile primare
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+

@@ -20,3 +20,6 @@ from beneficiari.models import Beneficiar
 def formular_view(request):
     beneficiari = Beneficiar.objects.all()
     return render(request, "formular.html", {"beneficiari": beneficiari})
+
+def centrale_termice_view(request):
+    return render(request, 'partials/centrale_termice.html')

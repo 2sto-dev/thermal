@@ -1,0 +1,164 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Verificare Tehnică - BBINSTALL{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- Fonturi -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <style>
+    body {
+      font-family: "Lora", serif;
+      line-height: 1.6;
+    }
+    h2, h4, h5, h6 {
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+    }
+    /* Stil personalizat pentru paragrafe cu look de h6 */
+    p.h6-style {
+      font-family: "Merriweather", serif;
+      font-size: 1rem; /* dimensiunea lui h6 */
+      font-weight: 700;
+      margin-bottom: 1rem; /* spațiu mai mare */
+    }
+    section {
+      margin-bottom: 2rem; /* spațiu între secțiuni */
+    }
+  </style>
+</head>
+<div class="container py-5">
+
+  <!-- Titlu principal -->
+  <section class="mb-5">
+    <p class="h6-style">
+      În cazul în care s-a stricat centrala termică sau considerați că nu mai funcționează ca atunci când ați achiziționat-o, 
+      puteți apela cu încredere la serviciul nostru de reparații centrale termice.
+    </p>
+    <p class="h6-style">
+      Echipa noastră se va deplasa la adresa unde este instalată centrala, va constata defectul (dacă există) și va comunica 
+      motivul apariției acestuia pentru a evita reapariția situației pe viitor. Totodată, vi se va prezenta costul final al reparației.
+    </p>
+  </section>
+
+  <!-- Carduri Garanție + Piese de schimb -->
+  <section class="row g-4 mb-5">
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100 border-0">
+        <div class="card-body">
+          <h5 class="fw-bold text-secondary mb-3">
+            <i class="bi bi-star-fill text-primary me-2"></i> Garanție
+          </h5>
+          <p class="h6-style mb-0">
+            Piesele de schimb folosite sunt originale și beneficiază de garanție 24 luni, iar pentru manoperă 
+            se acordă garanție de 3 luni.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100 border-0">
+        <div class="card-body">
+          <h5 class="fw-bold text-secondary mb-3">
+            <i class="bi bi-gear-fill text-primary me-2"></i> Piese de schimb originale
+          </h5>
+          <p class="h6-style mb-0">
+            Operatorii noștri de service dispun de un stoc mare de piese de schimb, astfel încât reparațiile să fie 
+            realizate rapid și eficient.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Probleme frecvente -->
+  <section class="mb-5">
+    <h4 class="fw-bold text-secondary mb-4">Probleme frecvente întâlnite la centrale</h4>
+    <ul class="list-unstyled h6-style">
+      <li><i class="bi bi-exclamation-circle text-warning me-2"></i> Centrala afișează avarii (ex: eroare F4 Viessmann, eroare 01 Romstal, eroare E01 Immergas etc.)</li>
+      <li><i class="bi bi-exclamation-circle text-warning me-2"></i> Presiune scăzută în centrală</li>
+      <li><i class="bi bi-exclamation-circle text-warning me-2"></i> Panoul de comandă nu răspunde sau se stinge deși centrala este în priză</li>
+      <li><i class="bi bi-exclamation-circle text-warning me-2"></i> Curge apă din centrală</li>
+      <li><i class="bi bi-exclamation-circle text-warning me-2"></i> Centrala nu pornește în regim de încălzire</li>
+      <li><i class="bi bi-exclamation-circle text-warning me-2"></i> Centrala nu prepară apă caldă menajeră</li>
+      <li><i class="bi bi-exclamation-circle text-warning me-2"></i> Zgomote puternice în funcționare</li>
+      <li><i class="bi bi-exclamation-circle text-warning me-2"></i> Presiune variabilă pe manometru</li>
+    </ul>
+  </section>
+
+  <!-- Concluzie -->
+  <section>
+    <p class="h6-style">
+      Indiferent de problema întâmpinată cu centrala, apelați-ne și vom încerca să vă ajutăm inclusiv telefonic. 
+      Dacă problema nu se poate rezolva pe loc, vom programa o intervenție promptă la domiciliu.
+    </p>
+  </section>
+<!-- Prețuri reparații centrale termice -->
+<section class="mb-5">
+  <div class="row align-items-center g-4">
+    
+    <!-- Tabel Prețuri -->
+    <div class="col-lg-7">
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h4 class="fw-bold text-secondary mb-4">
+            <i class="bi bi-cash-coin text-primary me-2"></i> Prețuri reparații centrale termice
+          </h4>
+          <p class="h6-style"><strong>Puteri mai mici de 36 kW</strong></p>
+
+          <div class="table-responsive">
+            <table class="table table-sm table-striped table-hover align-middle shadow-sm">
+              <thead class="table-primary">
+                <tr>
+                  <th>Serviciu</th>
+                  <th class="text-center">Preț</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Deplasare și constatare defecțiune – fără remediere</td>
+                  <td class="text-center">de la 50 lei</td>
+                </tr>
+                <tr>
+                  <td>Intervenție cu remedierea defectului, fără înlocuirea pieselor</td>
+                  <td class="text-center">100 - 350 lei</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="mt-3 text-danger small fw-bold">
+            ** Dacă remedierea necesită piese de schimb se va achita suplimentar doar costul pieselor!
+          </p>
+
+          <p class="h6-style text-muted fst-italic mt-2">
+            Pentru putere mai mare de 36kW a centralei termice se realizează ofertă personalizată.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Poză -->
+    <div class="col-lg-5 text-center">
+      <img src="{{ MEDIA_URL }}reparatii-centrale.png"
+           alt="Reparații centrale termice"
+           class="img-fluid rounded shadow-sm"
+           style="max-width: 90%; height: auto;">
+    </div>
+
+  </div>
+</section>
+
+</div>
+</html>

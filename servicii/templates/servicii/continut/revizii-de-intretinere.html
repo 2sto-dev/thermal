@@ -1,0 +1,194 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Revizie de întreținere - BBINSTALL{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- Fonturi -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: "Lora", serif;
+      line-height: 1.6;
+    }
+    h2, h4, h5, h6 {
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+    }
+    p.h6-style {
+      font-family: "Merriweather", serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .card.bg-light {
+      background-color: #f8f9fa !important; /* gri foarte deschis */
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+<div class="container py-5">
+
+  <!-- Titlu -->
+  <section class="mb-5">
+    <h5>
+      Operațiunile de întreținere se efectuează în totalitate sau parțial, în funcție de vechimea echipamentului,
+      tipul constructiv și starea acestuia. Scopul este menținerea eficienței și siguranței centralei termice.
+    </h5>
+  </section>
+
+  <!-- Card Operațiuni -->
+  <section class="mb-5">
+    <div class="card shadow-sm border-0 bg-light">
+      <div class="card-body">
+        <h4 class="fw-bold text-secondary mb-4">
+          <i class="bi bi-gear-fill text-primary me-2"></i> Operațiunile care se efectuează în cadrul reviziei sunt:
+        </h4>
+
+        <!-- Primele 5 -->
+        <ul class="list-unstyled h6-style mb-0" id="lista-initiala">
+          <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea și curățarea focarului</li>
+          <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea și curățarea arzătorului</li>
+          <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea și curățarea electrozilor de aprindere și ionizare</li>
+          <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea funcționalității termostatului de ambient</li>
+          <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea etanșeității pe partea hidraulică a centralei și a oxidării conexiunilor</li>
+        </ul>
+
+        <!-- Restul ascuns -->
+        <div class="collapse" id="restul-operatiunilor">
+          <ul class="list-unstyled h6-style mt-3">
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea pernei de aer din vasul de expansiune și refacerea presiunii</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea presiunii gazului (static și dinamic)</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea și curățarea ventilatorului</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea și curățarea sifonului de condens și a manometrului</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Analiza gazelor de ardere în putere minimă / maximă și efectuarea reglajelor</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea vizuală a colectorului de fum</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Controlarea aprinderii și funcționării corecte</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea reglării arzătorului pentru apă caldă menajeră și încălzire</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea dispozitivelor de comandă și reglare</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea întrerupătorului general de pe panoul de comandă</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Verificarea potențiometrului pentru reglarea temperaturii</li>
+            <li><i class="bi bi-check2-circle text-primary me-2"></i> Testarea dispozitivului de siguranță în lipsa gazului</li>
+          </ul>
+        </div>
+
+        <!-- Buton Mai mult / Mai puțin -->
+        <div class="text-center mt-3">
+          <button id="toggleBtn" class="btn btn-outline-primary btn-sm" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#restul-operatiunilor"
+                  aria-expanded="false" aria-controls="restul-operatiunilor">
+            Mai mult <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Dispozitive de control și siguranță -->
+  <section class="mb-5">
+    <div class="card shadow-sm border-0 bg-light">
+      <div class="card-body">
+        <h5 class="fw-semibold text-secondary mb-3">
+          <i class="bi bi-shield-check text-primary me-2"></i> Dispozitive de control și siguranță
+        </h5>
+        <p class="h6-style">
+          Verificarea vizuală a dispozitivelor de control și siguranță care nu trebuie să fie îndepărtate și/sau 
+          scurt-circuitate și în special:
+        </p>
+        <ul class="h6-style">
+          <li>termostatul de siguranță la supratemperatură</li>
+          <li>presostatul de apă</li>
+          <li>presostatul de siguranță al ventilatorului</li>
+        </ul>
+        <p class="h6-style text-muted fst-italic mt-3">
+          Operațiunile de întreținere se efectuează în totalitate / parțial, în funcție de vechimea echipamentului, 
+          tipul constructiv și starea acestuia.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Secțiune Prețuri revizie -->
+  <section class="mb-5">
+    <div class="card shadow-sm border-0 bg-light">
+      <div class="card-body">
+        <h4 class="fw-bold text-center mb-4">Cât de des ar trebui să faci revizia de întreținere a centralei termice?</h4>
+        <p class="h6-style text-center">
+          Din experiență vă putem spune că în cazul centralelor în condensație, revizia de întreținere este necesară anual,
+          având în vedere că o colmatare a sistemului de evacuare a condensului poate cauza multe defecțiuni costisitoare și
+          poate pune în pericol funcționarea centralei termice.
+        </p>
+
+        <div class="row align-items-center mt-5">
+          <div class="col-lg-7">
+            <h5 class="fw-bold text-primary mb-3">
+              <i class="bi bi-cash-coin me-2"></i> Prețuri revizii de întreținere a centralelor termice
+            </h5>
+            <p class="h6-style"><strong>Puteri mai mici de 36 kW</strong></p>
+            <div class="table-responsive">
+              <table class="table table-sm table-striped table-hover align-middle shadow-sm">
+                <thead class="table-primary">
+                  <tr>
+                    <th>Serviciu</th>
+                    <th class="text-center">Preț</th>
+                  </tr>
+                </thead>
+                
+                  <tbody>
+                    {% for p in preturi_standard %}
+                    <tr>
+                      <td><p class="h6-style mb-0">{{ p.denumire }}</p></td>
+                      <td class="text-center fw-semibold">
+                        <p class="h6-style mb-0">
+                          {{ p.pret }} lei{% if p.um %}/{{ p.um }}{% endif %}
+                        </p>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
+            </div>
+            <p class="mt-2 text-muted fst-italic small">
+              ** Dacă remedierea necesită piese de schimb se va achita suplimentar doar costul pieselor.  
+              Pentru centrale cu putere mai mare de 36kW se realizează ofertă personalizată.
+            </p>
+          </div>
+          <div class="col-lg-5 text-center mt-4 mt-lg-0">
+            <img src="{{ MEDIA_URL }}reparatii-centrale.png"
+                alt="Prețuri revizie centrală"
+                class="img-fluid rounded shadow-sm"
+                style="max-width: 90%; height: auto;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% bootstrap_javascript %}
+<script>
+  // Schimbă textul butonului între Mai mult / Mai puțin
+  const toggleBtn = document.getElementById('toggleBtn');
+  const collapseEl = document.getElementById('restul-operatiunilor');
+
+  collapseEl.addEventListener('show.bs.collapse', () => {
+    toggleBtn.innerHTML = 'Mai puțin <i class="bi bi-chevron-up"></i>';
+  });
+  collapseEl.addEventListener('hide.bs.collapse', () => {
+    toggleBtn.innerHTML = 'Mai mult <i class="bi bi-chevron-down"></i>';
+  });
+</script>
+</body>
+</html>

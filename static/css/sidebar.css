@@ -1,0 +1,66 @@
+/* sidebar.css – stiluri dedicate pentru sidebar BBINSTALL */
+
+/* Toată zona de sidebar */
+.sidebar {
+  font-family: 'Merriweather', serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #212529;
+}
+
+/* Cardurile din sidebar */
+.sidebar .card {
+  font-family: 'Merriweather', serif;
+  font-size: 16px;
+  line-height: 1.6;
+  border: 1px solid #dee2e6;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+}
+
+/* Titluri în sidebar */
+.sidebar h5,
+.sidebar h6 {
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 0.75rem;
+}
+
+/* Lista servicii */
+.sidebar .list-group-item {
+  font-size: 16px;
+  border-bottom: 2px solid #dee2e6 !important;
+  padding: 0.5rem 1rem;
+}
+
+.sidebar .list-group-item a {
+  color: #212529;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.sidebar .list-group-item a:hover {
+  color: #12447d;
+}
+
+/* Iconițe */
+.sidebar i {
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+/* Specific pentru promoții */
+.sidebar .card.bg-warning {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: #212529;
+}
+
+/* Elimină .small din Bootstrap care micșorează fontul */
+.sidebar .card p,
+.sidebar .card span {
+  font-size: 16px !important;
+  line-height: 1.6;
+}

@@ -8,7 +8,6 @@ from .views import AdaugaBeneficiar
 from solicitari.views import home_view
 from django.contrib.auth import views as auth_views
 from . import views
-from .views import centrale_termice_view
 
 urlpatterns = [
     path('', home_view, name='home'),
@@ -19,7 +18,7 @@ urlpatterns = [
     path("solicitare-details/", beneficiar_details, name="solicitare-details"),
     path('servicii/', TemplateView.as_view(template_name='partials/servicii.html'), name='servicii'),
     path('contact/', views.contact_view, name='contact'),
-    path('centrale_termice/', views.centrale_termice_view, name='centale_termice'),
+    
 
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
         

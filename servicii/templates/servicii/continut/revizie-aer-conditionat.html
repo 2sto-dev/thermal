@@ -1,0 +1,127 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Revizie Aer Condiționat - BBINSTALL{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: "Lora", serif; }
+    h2, h4, h5 { font-family: "Merriweather", serif; font-weight: 700; }
+    p.h6-style { font-family: "Merriweather", serif; font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+    section { margin-bottom: 2rem; }
+  </style>
+</head>
+<body class="bg-light">
+
+<div class="container py-1">
+{% include "partials/banda_carousel.html" %} 
+
+  <!-- Titlu și descriere -->
+  <section class="mb-5">
+    <div class="row align-items-start">
+      <div class="col-md-6">
+        <h2 class="fw-bold text-center mb-4">Revizie aer condiționat</h2>
+        <p class="h6-style">
+          Efectuăm revizii aparate aer condiționat în <strong>Drobeta-Turnu Severin</strong>.
+        </p>
+        <p>
+          Serviciile de revizie aer condiționat se efectuează numai în baza unei programări prealabile
+          și doar în limita disponibilității pe care o avem. Pentru a solicita o programare, ne poți contacta
+          telefonic, pe e-mail sau folosind chat-ul din site.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <h5 class="fw-bold">Revizia unui aparat aer condiționat tip split de perete include:</h5>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Verificare tehnică aparat (presiuni agent frigorific, legături frigorifice, matisaj traseu frigorific)</li>
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Verificare furtun de condens aparat (scurgere unitate interioară)</li>
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Completare cu freon (R410a sau R32) în limita a 200g / aparat acolo unde este cazul</li>
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Igienizare premium unitate interioară aparat aer condiționat</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carduri Beneficii -->
+  <section class="row g-3 mb-5">
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100 text-center">
+        <div class="card-body">
+          <i class="bi bi-thermometer-half fs-2 text-primary"></i>
+          <h5 class="fw-bold mt-2">Verificare tehnică</h5>
+          <p class="h6-style mb-0">Control presiuni agent frigorific și conexiuni corecte.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100 text-center">
+        <div class="card-body">
+          <i class="bi bi-droplet fs-2 text-info"></i>
+          <h5 class="fw-bold mt-2">Furtun condens</h5>
+          <p class="h6-style mb-0">Prevenirea scurgerilor la unitatea interioară.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100 text-center">
+        <div class="card-body">
+          <i class="bi bi-shield-check fs-2 text-success"></i>
+          <h5 class="fw-bold mt-2">Igienizare premium</h5>
+          <p class="h6-style mb-0">Dezinfectare completă pentru un aer sănătos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prețuri -->
+  <section id="preturi">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h4 class="fw-bold text-secondary mb-4">
+          <i class="bi bi-cash-coin text-primary me-2"></i> Prețuri revizie aer condiționat tip split de perete
+        </h4>
+        <div class="table-responsive">
+          <table class="table table-sm table-striped table-hover align-middle shadow-sm">
+            <thead class="table-warning">
+              <tr>
+                <th>SERVICIU</th>
+                <th class="text-center">PREȚ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in preturi_standard %}
+              <tr>
+                <td><p class="h6-style mb-0">{{ p.denumire }}</p></td>
+                <td class="text-center fw-semibold">
+                  <p class="h6-style mb-0">
+                    {{ p.pret|floatformat:0 }} lei{% if p.um %}/{{ p.um }}{% endif %}
+                  </p>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="2" class="text-center text-muted fst-italic">Momentan nu există prețuri definite.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% bootstrap_javascript %}
+</body>
+</html>

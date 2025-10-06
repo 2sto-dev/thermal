@@ -1,0 +1,104 @@
+<!-- Sidebar Termice -->
+<aside class="col-lg-3 mb-4 sidebar px-lg-4">
+
+  <!-- Titlu Sidebar -->
+ <div class="mb-4 mt-4">
+        <h5 class="text-uppercase fw-bold d-flex align-items-center px-3 py-2 rounded" 
+            style="background-color:#12447d; color:#fff;">
+          <i class="bi bi-snow me-2" style="color:#fff;"></i>Centrale termice
+        </h5>
+      </div>
+
+  <!-- Lista servicii -->
+  <div class="card shadow-sm border-0 rounded-3 mb-4 bg-primary-subtle">
+    <div class="card-header bg-primary text-white fw-bold d-flex align-items-center">
+      <i class="bi bi-list-task me-2"></i> Servicii
+    </div>
+    <ul class="list-group list-group-flush">
+      {% for serviciu in servicii_termice %}
+        <li class="list-group-item px-3 py-2 border-bottom"
+            style="border-bottom:2px solid #dee2e6 !important;">
+          <a href="{% url 'serviciu_detail' serviciu.slug %}" 
+             class="d-flex align-items-center text-decoration-none {% if serviciu_selectat and serviciu.slug == serviciu_selectat.slug %}fw-bold text-primary{% else %}text-dark{% endif %}">
+            <i class="bi bi-chevron-right me-2 {% if serviciu_selectat and serviciu.slug == serviciu_selectat.slug %}text-primary{% else %}text-secondary{% endif %}"></i>
+            {{ serviciu.titlu }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+<!-- Card Program -->
+      <div class="card shadow-sm mb-3 border-0 bg-primary-subtle">
+        <div class="card-header fw-bold d-flex align-items-center"
+             style="background-color:#12447d; color:#fff;">
+          <i class="bi bi-clock me-2"></i> Program de lucru
+        </div>
+        <div class="card-body">
+          <p class="mb-1"><span class="fw-semibold">Luni - Vineri:</span> 08:00 - 18:00</p>
+          <p class="mb-0"><span class="fw-semibold">Sâmbătă:</span> 09:00 - 14:00</p>
+        </div>
+      </div>
+
+      <!-- Card Contact -->
+      <div class="card shadow-sm mb-3 border-0 bg-primary-subtle">
+        <div class="card-header fw-bold d-flex align-items-center"
+             style="background-color:#12447d; color:#fff;">
+          <i class="bi bi-telephone me-2"></i> Contact
+        </div>
+        <div class="card-body">
+          <p class="mb-1">📞 <span class="fw-semibold">+40 770 794 240</span></p>
+          <p class="mb-0">✉️ <span class="fw-semibold">office@bbinstall.ro</span></p>
+        </div>
+      </div>
+
+      <!-- Card Promoții -->
+      <div class="card shadow-sm mb-3 border-0 bg-primary-subtle">
+        <div class="card-header fw-bold d-flex align-items-center"
+             style="background-color:#12447d; color:#fff;">
+          <i class="bi bi-percent me-2"></i> Promoții
+        </div>
+        <div class="card-body">
+          <p class="mb-0">
+            <span class="fw-semibold">Reducere 10%</span> la revizii în această lună! Profită acum și programează o vizită.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card Siguranță -->
+      <div class="card shadow-sm mb-3 border-0 bg-primary-subtle">
+        <div class="card-header fw-bold d-flex align-items-center"
+             style="background-color:#12447d; color:#fff;">
+          <i class="bi bi-shield-check me-2"></i> Siguranță
+        </div>
+        <div class="card-body">
+          <p class="mb-0">
+            Toate intervențiile sunt efectuate de personal autorizat și beneficiază de garanție.
+          </p>
+        </div>      
+      </div>
+</aside>
+
+    <!-- Conținut principal -->
+    <main class="col-lg-9 px-lg-5">
+      {% if serviciu_selectat %}
+      <div class="p-4 rounded-3 bg-white shadow-sm">
+        <article class="animate__animated animate__fadeIn">
+          <h2 class="fw-bold d-flex align-items-center border-bottom border-3 border-dark pb-2 mb-4">
+            <i class="bi bi-tools me-2 text-dark"></i>{{ serviciu_selectat.titlu }}
+          </h2>
+          <div class="card-text">
+            {% if template_content %}
+              {% include template_content %}
+            {% else %}
+              <p>Conținutul pentru acest serviciu nu este încă disponibil.</p>
+            {% endif %}
+          </div>
+        </article>
+      </div>
+      {% else %}
+      <div class="alert alert-info mt-3">Nu există niciun serviciu activ de afișat.</div>
+      {% endif %}
+    </main>
+
+  </div>
+</div>

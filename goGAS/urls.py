@@ -1,25 +1,13 @@
-"""
-URL configuration for goGAS project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 
 from django.contrib import admin
 from django.urls import path, include
-from goGAS import views  # Importă funcția personalizat
+from goGAS import views
 from goGAS.views import custom_login
-
+from servicii.views import centrale_termice_view  # ✅ Import 
+from servicii.views import aer_conditionat_view, serviciu_detail_clima_view
+from django.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,7 +16,12 @@ urlpatterns = [
     path("adrese/", include("adrese.urls")),
     path("api/", include("raportare.api.urls")),
     path("formular/", views.formular_view, name="formular"),
-    path(
-        "solicitari/", include("solicitari.urls")
-    ), 
+    path("servicii/", include("servicii.urls")),
+    path("solicitari/", include("solicitari.urls")),
+    path("centrale_termice/", centrale_termice_view, name="centrale_termice"),  
+    path("aer_conditionat/", aer_conditionat_view, name="aer_conditionat"),
+    path("aer_conditionat/<slug:slug>/", serviciu_detail_clima_view, name="serviciu_detail_clima"), 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

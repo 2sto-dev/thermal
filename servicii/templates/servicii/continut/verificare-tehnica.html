@@ -1,0 +1,315 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Verificare Tehnică - BBINSTALL{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+  <link rel="stylesheet" href="{% static 'css/card.css' %}">
+
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- Fonturi -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <style>
+    body {
+      font-family: "Lora", serif;
+      line-height: 1.6;
+    }
+    h2, h4, h5, h6 {
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+    }
+    /* Stil personalizat pentru paragrafe cu look de h6 */
+    p.h6-style {
+      font-family: "Merriweather", serif;
+      font-size: 1rem; /* dimensiunea lui h6 */
+      font-weight: 700;
+      margin-bottom: 1rem; /* spațiu mai mare */
+    }
+    section {
+      margin-bottom: 2rem; /* spațiu între secțiuni */
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+
+    <!-- Titlu principal -->
+    <section class="border-bottom pb-3 mb-4">
+      <h5 class="fw-bold text-dark mb-0">
+        Activitate conform prescripției tehnice ISCIR PT A1 – 2010, obligatorie o dată la fiecare 2 ani pentru siguranța și funcționarea eficientă a centralei termice.
+      </h5>
+    </section>
+
+    <!-- Descriere -->
+    <section>
+      <p class="h6-style">
+        Verificarea tehnică periodică (VTP) se efectuează numai de persoane juridice autorizate ISCIR și se aplică
+        microcentralelor puse deja în funcțiune (PIF).
+      </p>
+
+      <p class="h6-style">Rezultatul verificării poate fi:</p>
+      <ul class="list-unstyled mb-4">
+        <li>
+          <i class="bi bi-check-circle-fill text-success me-2"></i>
+          <strong>ADMIS</strong> – centrala poate funcționa normal încă 2 ani.
+        </li>
+        <li>
+          <i class="bi bi-x-circle-fill text-danger me-2"></i>
+          <strong>RESPINS</strong> – utilizarea interzisă până la remedierea deficiențelor și o nouă verificare.
+        </li>
+      </ul>
+    </section>
+
+<!-- Operațiuni -->
+<section class="mb-5">
+  <h5 class="fw-semibold text-secondary mb-4">
+    <i class="bi bi-list-check me-2 text-primary"></i> Operațiuni efectuate
+  </h5>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title h4">
+            <i class="bi bi-check2-circle text-primary me-2"></i>
+            Verificarea integrității aparatului și a condițiilor de instalare
+          </h6>
+          <p class="card-text small text-muted">
+            Se verifică structura generală și conformitatea instalării.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title h4">
+            <i class="bi bi-check2-circle text-primary me-2"></i>
+            Curățarea aparatului (dacă este necesar)
+          </h6>
+          <p class="card-text small text-muted">
+            Îndepărtarea depunerilor și curățarea componentelor interne.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title h4">
+            <i class="bi bi-check2-circle text-primary me-2"></i>
+            Reglarea instalației de ardere pentru eficiență maximă
+          </h6>
+          <p class="card-text small text-muted">
+            Ajustarea arderii pentru consum optim și siguranță.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title h4">
+            <i class="bi bi-check2-circle text-primary me-2"></i>
+            Analiza gazelor arse și verificarea valorilor de siguranță
+          </h6>
+          <p class="card-text small text-muted">
+            Se analizează compoziția gazelor pentru respectarea normelor ISCIR.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title h4">
+            <i class="bi bi-check2-circle text-primary me-2"></i>
+            Testarea dispozitivelor de control, reglare și siguranță
+          </h6>
+          <p class="card-text small text-muted">
+            Se verifică buna funcționare a termostatelor, senzorilor și supapelor de siguranță.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="card-title h4">
+            <i class="bi bi-check2-circle text-primary me-2"></i>
+            Verificarea conformității cu livretul tehnic
+          </h6>
+          <p class="card-text small text-muted">
+            Se confirmă că aparatul respectă specificațiile din livretul tehnic.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+   
+
+    <!-- Prețuri -->
+    <section class="row align-items-center mb-5">
+      <div class="col-lg-5 text-center mb-4 mb-lg-0">
+        <img src="{{ MEDIA_URL }}verificare_iscir.png"
+             alt="Verificare tehnică"
+             class="img-fluid rounded shadow-sm"
+             style="max-width: 85%; height: auto;">
+      </div>
+      <div class="col-lg-7">
+        <h5 class="fw-bold text-primary mb-4">
+          <i class="bi bi-cash-coin me-2"></i> Prețuri verificare tehnică periodică
+        </h5>
+        <p class="h6-style"><strong>Puteri mai mici de 36 kW</strong></p>
+        <div class="table-responsive">
+          <table class="table table-sm table-striped table-hover align-middle shadow-sm">
+            <thead class="table-primary">
+              <tr>
+                <th>Serviciu</th>
+                <th class="text-center">Preț</th>
+              </tr>
+            </thead>
+         
+                  <tbody>
+                    {% for p in preturi_standard %}
+                    <tr>
+                      <td><p class="h6-style mb-0">{{ p.denumire }}</p></td>
+                      <td class="text-center fw-semibold">
+                        <p class="h6-style mb-0">
+                          {{ p.pret }} lei{% if p.um %}/{{ p.um }}{% endif %}
+                        </p>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-muted fst-italic small">
+          Pentru centrale cu putere mai mare de 36kW se realizează ofertă personalizată.
+        </p>
+      </div>
+    </section>
+
+   <!-- Spălări chimice -->
+<section class="mb-5">
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+      <h4 class="fw-bold text-secondary mb-4">
+        <i class="bi bi-droplet-half text-primary me-2"></i> Spălări chimice
+      </h4>
+      <p class="h6-style">
+        Spălarea chimică a centralei este esențială pentru menținerea performanței și durabilității instalației.
+        Se folosesc substanțe speciale pentru a îndepărta depunerile de calcar și impurități din schimbătoarele de căldură și conducte.
+      </p>
+      <p class="h6-style text-danger">⚠️ Atenție! Nu se face preventiv.</p>
+
+      <div class="row g-4">
+        <!-- Pași în carduri mici -->
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-light">
+            <div class="card-body text-center">
+              <h6 class="h6-style"><i class="bi bi-gear-wide-connected text-primary me-2"></i> Pregătirea</h6>
+              <p class="small text-muted mb-0">Se verifică echipamentul și se pregătește pentru procesul de spălare.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-light">
+            <div class="card-body text-center">
+              <h6 class="h6-style"><i class="bi bi-droplet text-primary me-2"></i> Spălarea propriu-zisă</h6>
+              <p class="small text-muted mb-0">Introducerea soluției chimice și eliminarea depunerilor.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-light">
+            <div class="card-body text-center">
+              <h6 class="h6-style"><i class="bi bi-check2-all text-primary me-2"></i> Încheierea</h6>
+              <p class="small text-muted mb-0">Clătirea instalației și verificarea eficienței.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center g-4 mt-4">
+        <div class="col-lg-6">
+          <h6 class="h6-style">Dacă nu se realizează la timp, pot apărea:</h6>
+          <ul class="small mb-0">
+            <li>Ruginirea radiatoarelor</li>
+            <li>Blocarea pompei</li>
+            <li>Consum ridicat de gaz</li>
+            <li>Defecțiuni repetate ale componentelor</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 text-center">
+          <img src="{{ MEDIA_URL }}reparatii-centrale.png"
+               alt="Spălare chimică centrală"
+               class="img-fluid rounded shadow-sm"
+               style="max-width: 85%; height: auto;">
+        </div>
+      </div>
+
+      <div class="bg-light rounded p-4 shadow-sm mt-4">
+        <h6 class="fw-bold mb-3"><i class="bi bi-question-circle text-primary me-2"></i> Când este necesară curățarea chimică?</h6>
+        <ul class="small mb-0">
+          <li><i class="bi bi-droplet-half text-primary me-2"></i> zgomote puternice de „fierbere” în centrală</li>
+          <li><i class="bi bi-droplet-half text-primary me-2"></i> defecte repetate la schimbătorul de căldură</li>
+          <li><i class="bi bi-droplet-half text-primary me-2"></i> calorifere încălzite neuniform</li>
+          <li><i class="bi bi-droplet-half text-primary me-2"></i> consum ridicat de gaz</li>
+          <li><i class="bi bi-droplet-half text-primary me-2"></i> opriri sau avarii frecvente</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Montare filtru -->
+<section class="mb-5">
+  <div class="card shadow-sm border-0">
+    <div class="row g-0 align-items-center">
+      <div class="col-lg-7 p-4">
+        <h5 class="fw-bold text-secondary mb-3">
+          <i class="bi bi-funnel-fill text-primary me-2"></i> Întreținerea prin montarea de filtre
+        </h5>
+        <p class="h6-style">
+          Montarea filtrelor de protecție previne acumularea impurităților și depunerilor în instalație.
+          Această operațiune protejează schimbătorul de căldură și alte componente interne.
+        </p>
+        <p class="h6-style">
+          Filtrele rețin calcarul și impuritățile din apă, reducând riscul de defecțiuni și crescând durata de viață a echipamentului.
+        </p>
+      </div>
+      <div class="col-lg-5 text-center">
+        <img src="{{ MEDIA_URL }}montare_filte.png"
+             alt="Montare filtru centrală"
+             class="img-fluid rounded-end shadow-sm"
+             style="max-width: 90%; height: auto;">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  {% bootstrap_javascript %}
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

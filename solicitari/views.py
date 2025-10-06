@@ -16,8 +16,7 @@ def servicii_view(request):
 def contact_view(request):
     return render(request, 'partials/contact.html')
 
-def centrale_termice_view(request):
-    return render(request, 'partials/centrale_termice.html')
+
 
 
 def curata_nume(nume):

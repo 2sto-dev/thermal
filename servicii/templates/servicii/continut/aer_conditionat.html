@@ -1,0 +1,114 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Montaj Aer Condiționat - BBINSTALL{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <style>
+    body {
+      font-family: "Lora", serif;
+      line-height: 1.6;
+    }
+    h2, h4, h5, h6 {
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+    }
+    p.h6-style {
+      font-family: "Merriweather", serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+
+<div class="container py-5">
+
+  <!-- Titlu + descriere -->
+  <section class="mb-5">
+    <h2 class="fw-bold text-primary mb-3">
+      <i class="bi bi-snow text-info me-2"></i> Efectuăm servicii de montaj aer condiționat în Drobeta Turnu Severin
+    </h2>
+    <p>
+      Serviciul de montaj aer condiționat se efectuează doar pe bază de programare prealabilă și în limita
+      disponibilității echipei noastre. Pentru a solicita o programare ne poți contacta telefonic, prin e-mail
+      sau folosind chat-ul din site.
+    </p>
+  </section>
+
+  <!-- Montaj standard -->
+  <section class="mb-5">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h4 class="fw-bold text-secondary mb-4">
+          <i class="bi bi-tools text-primary me-2"></i> Montaj standard al unui aparat de aer condiționat tip split de perete include:
+        </h4>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Executarea unei singure găuri în peretele exterior</li>
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Amplasarea unității exterioare și unității interioare în limita traseului frigorific de 3 m</li>
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Matisarea traseului frigorific (în limita de 3 m de traseu)</li>
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Efectuarea probei de funcționare și explicarea principalelor facilități ale aparatului</li>
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Instalare conform legislației în domeniu (nu se vor perfora grinzi sau stâlpi de beton)</li>
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Unitatea exterioară se va fixa pe peretele exterior cât mai aproape de unitatea interioară</li>
+          <li><i class="bi bi-check2-circle text-success me-2"></i> Instalarea se face în locuri sigure, fără risc de accidentare</li>
+          <li><i class="bi bi-x-circle-fill text-danger me-2"></i> Montajele care necesită schele, scări, nacelă sau alpinism NU sunt incluse în montajul standard</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prețuri -->
+  <section class="mb-5">
+    {% if preturi %}
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h4 class="fw-bold text-secondary mb-4">
+          <i class="bi bi-cash-coin text-primary me-2"></i> Prețuri {{ serviciu_selectat.titlu }}
+        </h4>
+        <div class="table-responsive">
+          <table class="table table-sm table-striped table-hover align-middle shadow-sm">
+            <thead class="table-primary">
+              <tr>
+                <th>Serviciu</th>
+                <th class="text-center">Preț</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in preturi %}
+              <tr>
+                <td>{{ p.denumire }}</td>
+                <td class="text-center">{{ p.pret }} lei</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-muted fst-italic small">
+          Prețurile pot varia în funcție de complexitatea lucrării sau de cerințe speciale.
+        </p>
+      </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info shadow-sm">
+      Nu există prețuri definite pentru acest serviciu.
+    </div>
+    {% endif %}
+  </section>
+
+</div>
+
+</html>

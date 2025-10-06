@@ -1,0 +1,318 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Montaj Aer Condiționat - BBINSTALL{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+  <link rel="stylesheet" href="{% static 'css/card.css' %}">
+
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <style>
+    body {
+      font-family: "Lora", serif;
+      line-height: 1.6;
+    }
+    h1, h2, h4, h5, h6 {
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+    }
+    p.h6-style {
+      font-family: "Merriweather", serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+      /* Carduri personalizate */
+  .custom-card {
+    border: none;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9f5ff 100%);
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  }
+
+  /* Efect hover */
+  .custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 162, 255, 0.3);
+    background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+  }
+
+  /* Icon mai mare + animatie la hover */
+  .custom-card:hover i {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+
+</style>
+</head>
+
+<body class="bg-light">
+
+  <div class="container py-1">
+
+   {% include "partials/banda_carousel.html" %} 
+
+   <section class="border-bottom pb-3 mb-4 text-center">
+  <h1 class="fw-bold mb-3">❄️ Confort optim, indiferent de sezon!</h1>
+  <p class="lead">
+    Oferim servicii profesionale de <strong>montaj, reparații și mentenanță</strong> pentru aparate de aer condiționat,
+    atât pentru locuințe, cât și pentru spații comerciale sau birouri.
+  </p>
+  <div class="row mt-4 g-3">
+    <div class="col-12 col-md-4">
+      <div class="card h-100 text-center custom-card animate__animated animate__fadeInUp animate__delay-1s">
+        <div class="card-body">
+          <i class="bi bi-house-check fs-2 text-primary"></i>
+          <h5 class="fw-bold mt-2">Montaj rapid și sigur</h5>
+          <p class="h6-style mb-0">Instalare conform standardelor, eficiență și durabilitate.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="card h-100 text-center custom-card animate__animated animate__fadeInUp animate__delay-2s">
+        <div class="card-body">
+          <i class="bi bi-wrench-adjustable-circle fs-2 text-primary"></i>
+          <h5 class="fw-bold mt-2">Reparații de urgență</h5>
+          <p class="h6-style mb-0">Diagnostic și intervenții rapide pentru orice defecțiune.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="card h-100 text-center custom-card animate__animated animate__fadeInUp animate__delay-3s">
+        <div class="card-body">
+          <i class="bi bi-shield-check fs-2 text-primary"></i>
+          <h5 class="fw-bold mt-2">Mentenanță periodică</h5>
+          <p class="h6-style mb-0">Curățare și verificări pentru prevenirea problemelor costisitoare.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+      <!-- ====================== BANNER SLOGAN ====================== -->
+      <div class="mt-4">
+        <div class="card shadow-sm border-0 rounded-3 text-center text-white" 
+             style="background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);">
+          <div class="card-body py-5">
+            <h2 class="fw-bold mb-3" style="font-family:'Merriweather', serif;">
+              ❄️ Răcoare vara, confort iarna – tot anul cu BBINSTALL!
+            </h2>
+            <p class="mb-4" style="font-family:'Merriweather', serif; font-size:1.1rem;">
+              Profesioniștii noștri îți asigură montaj, reparații și mentenanță rapidă și de încredere.
+            </p>
+            <a href="#preturi" class="btn btn-light btn-lg fw-bold px-4 shadow-sm">
+              <i class="bi bi-telephone-forward me-2"></i> Contactează-ne acum
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== CARDURI TITLU + DESCRIERE ====================== -->
+    <section class="mt-4">
+      <div class="row g-3 align-items-stretch">
+        
+        <!-- Card Titlu -->
+<div class="col-12 col-lg-6">
+  <div class="card shadow-sm h-100 text-center">
+    <div class="card-body d-flex flex-column justify-content-between">
+      
+      <!-- Titlu -->
+      <div>
+        <h2 class="fw-bold mb-0">
+          <i class="bi bi-snow me-2"></i> Montaj Aer Condiționat
+        </h2>
+        <h5 class="fw-semibold text-secondary mt-2">în Drobeta-Turnu Severin</h5>
+      </div>
+      
+      <!-- Logouri jos -->
+      <div class="d-flex justify-content-center align-items-center flex-wrap mt-4">
+        <img src="/media/daikin.png" alt="Daikin" class="mx-3" style="height:90px;">
+        <img src="/media/gree.png" alt="Gree" class="mx-3" style="height:90px;">
+        <img src="/media/midea.png" alt="Midea" class="mx-3" style="height:90px;">
+        <img src="/media/mitsubishi.png" alt="Mitsubishi" class="mx-3" style="height:90px;">
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+        <!-- Card Descriere + Buton -->
+        <div class="col-12 col-lg-6">
+          <div class="card shadow-sm h-100 text-center">
+            <div class="card-body">
+              <p class="h6-style mb-3">
+                Serviciul de montaj aer condiționat se efectuează doar pe baza unei programări prealabile și în limita disponibilității.
+              </p>
+              <p class="h6-style mb-4">
+                Pentru a solicita o programare, ne poți contacta 
+                <span class="fw-semibold">telefonic</span>, 
+                prin <span class="fw-semibold">e-mail</span> sau direct prin 
+                <span class="fw-semibold">chat-ul din site</span>.
+              </p>
+              <a href="#preturi" class="btn btn-primary btn-lg px-4 shadow-sm">
+                <i class="bi bi-calendar-check me-2"></i> Programează o instalare
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    
+
+    <!-- ====================== CARDURI MONTAJ + PREȚURI ====================== -->
+    <section id="preturi">
+      <div class="row g-3 align-items-stretch">
+        
+        <!-- Card Montaj standard -->
+        <div class="col-12 col-lg-6">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h4 class="fw-bold mb-4"><i class="bi bi-tools me-2 text-primary"></i> Montaj standard aer condiționat tip split de perete</h4>
+              <ul class="list-unstyled">
+                <li><p class="h6-style mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Executarea unei singure găuri în peretele exterior</p></li>
+                <li><p class="h6-style mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Amplasarea unității exterioare și interioare (traseu frigorific max. 3 m)</p></li>
+                <li><p class="h6-style mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Matisarea traseului frigorific (max. 3 m)</p></li>
+                <li><p class="h6-style mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Efectuarea probei de funcționare și explicarea funcțiilor aparatului</p></li>
+                <li><p class="h6-style mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Instalarea conform legislației</p></li>
+                <li><p class="h6-style mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Fixarea unității exterioare cât mai aproape de unitatea interioară</p></li>
+                <li><p class="h6-style mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Montaj doar în locuri accesibile și sigure</p></li>
+                <li><p class="h6-style fw-semibold text-danger"><i class="bi bi-x-circle-fill me-2"></i> Montajele care necesită schele, scări, nacele sau alpiniști NU sunt incluse în pachetul standard.</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+       
+        <!-- Card Prețuri standard -->
+        <div class="col-12 col-lg-6">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h4 class="fw-bold mb-4"><i class="bi bi-cash-coin me-2 text-primary"></i> Prețuri montaj standard</h4>
+              <div class="table-responsive">
+                <table class="table table-sm table-striped table-hover align-middle shadow-sm">
+                  <thead class="table-primary">
+                    <tr>
+                      <th>Serviciu</th>
+                      <th class="text-center">Preț</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for p in preturi_standard %}
+                    <tr>
+                      <td><p class="h6-style mb-0">{{ p.denumire }}</p></td>
+                      <td class="text-center fw-semibold">
+                        <p class="h6-style mb-0">
+                          {{ p.pret }} lei{% if p.um %}/{{ p.um }}{% endif %}
+                        </p>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <p class="h6-style fst-italic mt-3">Pentru modele complexe sau sisteme smart, prețul se stabilește în funcție de specificații.</p>
+              <p class="mt-2 text-muted fst-italic small">Prețurile sunt finale și nu sunt purtătoare de TVA.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== SUPLIMENTARE ====================== -->
+
+<section class="mt-5">
+  <div class="card border-0 shadow-sm bg-primary-subtle">
+    <div class="card-body">
+      <h4 class="fw-bold mb-4 text-primary">
+        <i class="bi bi-plus-circle me-2"></i> Lucrări și materiale suplimentare
+      </h4>
+      <p class="mb-3 text-dark">
+        Lucrările, materialele și accesoriile suplimentare montajului standard, dacă se pot efectua,
+        vor fi suportate de client după cum urmează:
+      </p>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle shadow-sm mb-0">
+          <thead class="table-light">
+            <tr>
+              <th class="text-start">Serviciu suplimentar</th>
+              <th class="text-center">Preț</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in preturi_suplimentare %}
+            <tr>
+              <td>
+                <p class="h6-style mb-0 d-flex align-items-center">
+                  {% if "beton" in s.denumire|lower %}
+                    <i class="bi bi-bricks text-secondary me-2"></i>
+                  {% elif "zidărie" in s.denumire|lower %}
+                    <i class="bi bi-bricks text-secondary me-2"></i>
+                  {% elif "traseu" in s.denumire|lower or "pvc" in s.denumire|lower %}
+                    <i class="bi bi-diagram-3 text-primary me-2"></i>
+                  {% elif "cablul" in s.denumire|lower or "electric" in s.denumire|lower %}
+                    <i class="bi bi-lightning text-warning me-2"></i>
+                  {% elif "furtun" in s.denumire|lower or "condens" in s.denumire|lower %}
+                    <i class="bi bi-droplet text-info me-2"></i>
+                  {% elif "șurub" in s.denumire|lower or "dibl" in s.denumire|lower %}
+                    <i class="bi bi-nut text-dark me-2"></i>
+                  {% elif "unități" in s.denumire|lower or "scări" in s.denumire|lower or "înălțime" in s.denumire|lower %}
+                    <i class="bi bi-ladder text-success me-2"></i>
+                  {% elif "demont" in s.denumire|lower %}
+                    <i class="bi bi-tools text-danger me-2"></i>
+                  {% else %}
+                    <i class="bi bi-plus-circle text-primary me-2"></i>
+                  {% endif %}
+                  {{ s.denumire }}
+                </p>
+              </td>
+              <td class="text-center fw-semibold">
+                <span class="badge bg-white text-dark fs-6 shadow-sm px-3 py-2">
+                  {{ s.pret }} lei{% if s.um %}/{{ s.um }}{% endif %}
+                </span>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="2" class="text-center text-muted fst-italic">
+                Momentan nu există lucrări suplimentare definite.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-3 text-dark fst-italic small">
+        Prețurile sunt finale și nu sunt purtătoare de TVA.
+      </p>
+    </div>
+  </div>
+</section>
+
+  </div>
+
+  {% bootstrap_javascript %}
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

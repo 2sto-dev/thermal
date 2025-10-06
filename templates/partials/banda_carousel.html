@@ -1,0 +1,55 @@
+<style>
+.logo-slider {
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0;
+  background: linear-gradient(90deg, #cfe4ff, #a9d2ff); /* fundal inspirat din poza */
+  border-top: 2px solid #dee2e6;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.logo-slider .logos {
+  display: flex;
+  width: calc(260px * 10);
+  animation: scroll 25s linear infinite;
+}
+
+.logo-slider .logos img {
+  max-height: 130px;
+  margin: 0 70px;
+  filter: grayscale(20%) drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.logo-slider .logos img:hover {
+  transform: scale(1.15);
+  filter: grayscale(0%) drop-shadow(0 4px 10px rgba(0,0,0,0.25));
+}
+
+.logo-slider:hover .logos {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+</style>
+
+<div class="logo-slider my-3">
+  <div class="logos">
+    <img src="/media/york.png" alt="York">
+    <img src="/media/daikin.png" alt="Daikin">
+    <img src="/media/gree.png" alt="Gree">
+    <img src="/media/midea.png" alt="Midea">
+    <img src="/media/mitsubishi.png" alt="Mitsubishi Electric">
+
+    <!-- duplicat pentru efect continuu -->
+    <img src="/media/york.png" alt="York">
+    <img src="/media/daikin.png" alt="Daikin">
+    <img src="/media/gree.png" alt="Gree">
+    <img src="/media/midea.png" alt="Midea">
+    <img src="/media/mitsubishi.png" alt="Mitsubishi Electric">
+  </div>
+</div>

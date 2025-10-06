@@ -12,16 +12,24 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  
+
+  <style>
+    /* Harta dimensiune fixă 900x400 */
+    #map {
+      width: 900px;
+      height: 400px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
+
 <body class="bg-light">
-  
+  {% include 'partials/navbar.html' %}
+  {% include 'partials/carousel.html' %}
 
-  <div class="container-fluid mt-4 px-4">
-   
-  </div>
-
-<div class="container my-5">
+  <div class="container my-5">
     <h4 class="mb-3">Trimite-ne un mesaj rapid pe WhatsApp</h4>
   
     <form id="whatsappForm" onsubmit="return sendToWhatsApp();">
@@ -40,6 +48,47 @@
       </button>
     </form>
   </div>
+
+  <!-- Harta Google Maps -->
+  <div id="map"></div>
+
+  <script>
+    function initMap() {
+      // Coordonatele exacte
+      const location = { lat: 44.638144, lng: 22.6542683 };
+
+      // Inițializare hartă
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 16,
+        center: location,
+      });
+
+      // Marker pe hartă
+      const marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        title: "B.B. Install Organization S.R.L"
+      });
+
+      // Popup la click pe marker
+      const infowindow = new google.maps.InfoWindow({
+        content: `<b>B.B. Install Organization S.R.L</b><br>
+                  <a href="https://www.google.com/maps?q=44.638144,22.6542683" target="_blank">
+                    Vezi pe Google Maps
+                  </a>`
+      });
+
+      marker.addListener("click", () => {
+        infowindow.open(map, marker);
+      });
+    }
+  </script>
+
+  <!-- Script Google Maps (cheia ta API obligatoriu aici) -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRRUOOsAafSZfVeMclwgJnAPE2-paqBx8&callback=initMap">
+  </script>
+
   <script>
     function sendToWhatsApp() {
       const nume = document.getElementById("nume").value.trim();
@@ -57,15 +106,6 @@
       return false; // prevenim submitul clasic
     }
   </script>
-  
- 
+{% include 'partials/footer.html' %}
 </body>
 </html>
-
-
-
-
-
-
-
-

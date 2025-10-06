@@ -1,0 +1,51 @@
+/* card.css – stiluri corporate pentru carduri */
+
+/* Containerul dedicat montajului */
+.container-montaj {
+  max-width: 1320px; /* păstrăm limită largă dar corporate */
+  margin: 0 auto;
+}
+
+/* Carduri */
+.card-bb {
+  font-family: "Merriweather", serif;
+  font-size: 18px;
+  line-height: 1.7;
+  border: 1px solid #e01212;
+  border-radius: 0.75rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  color: #212529;
+  padding: 1.5rem;
+}
+
+/* Titluri în carduri */
+.card-bb h2,
+.card-bb h3,
+.card-bb h4 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #12447d;
+  margin-bottom: 1rem;
+}
+
+/* Liste din carduri */
+.card-bb ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Tabele corporate */
+.card-bb table {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.card-bb table thead {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.card-bb table th,
+.card-bb table td {
+  padding: 0.75rem;
+}

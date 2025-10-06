@@ -1,38 +1,96 @@
 {% load static %}
-{% load django_bootstrap5 %}
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}BBINSTALL{% endblock %}</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicii Centrale termice</title>
 
-{% bootstrap_css %}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- Fonturi și stiluri -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    body {
+      font-family: 'Merriweather', serif;
+      background-color: #f8f9fa;
+      color: #b6b2b2;
+      font-size: 1.15rem;
+    }
+
+    .sidebar h5 {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 0.35rem;
+    }
+
+    .sidebar ul li a {
+      font-size: 1rem;
+      padding: 0.25rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar ul li a:hover {
+      color: #0d6efd;
+      font-weight: bold;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .card-text p,
+    .card-text li {
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    @media (min-width: 992px) {
+      body {
+        font-size: 1.05rem;
+      }
+
+      .card-title {
+        font-size: 1.6rem;
+      }
+
+      .card-text {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
 </head>
-<body class="bg-light">
 
-
+<body>
   {% include 'partials/navbar.html' %}
   {% include 'partials/carousel.html' %}
-  {% include 'partials/navbar_vertical.html' %}
-  {% include 'partials/footer.html' %}
   
+  <div class="container-fluid pt-1 pb-1">
+    <div class="row">
+      
+      
+      {% include 'partials/sidebar-termic.html' %}
+      
+    </div> <!-- end .row -->
+  </div> <!-- end .container-fluid -->
 
-  <div class="container-fluid">
-    {% block content %}{% endblock %}
-  </div>
-
-  <!-- WhatsApp pe mobil -->
-  <a href="https://wa.me/40770794240" class="whatsapp-float" title="Scrie-ne pe WhatsApp">
-    <i class="bi bi-whatsapp"></i>
-  </a>
-
-
+  {% include 'partials/footer.html' %}
 </body>
 </html>

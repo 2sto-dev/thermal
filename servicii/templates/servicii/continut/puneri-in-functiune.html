@@ -1,0 +1,175 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Punere în funcțiune - BBINSTALL{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <!-- Fonturi -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: "Lora", serif;
+      line-height: 1.6;
+    }
+    h2, h4, h5, h6 {
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+    }
+    p.h6-style {
+      font-family: "Merriweather", serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .card.bg-light {
+      background-color: #f8f9fa !important;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+<div class="container py-5">
+
+    <!-- Descriere PIF -->
+  <section class="mb-5">
+    <div class="card shadow-sm border-0 bg-light p-4">
+      <div class="card-body">
+        <h4 class="fw-bold text-secondary mb-4">
+          <i class="bi bi-play-circle-fill text-primary me-2"></i> Punerea în funcțiune a centralei termice (PIF)
+        </h4>
+        <p class="h6-style text-justify">
+          Punerea în funcțiune a centralei termice (PIF) se referă la procesul de inițiere, verificare și reglare a unei
+          centrale termice în scopul producerii de căldură și apă caldă pentru o clădire sau un ansamblu. Acest proces
+          implică mai multe etape și verificări pentru a asigura funcționarea corectă, eficiența și siguranța sistemului.
+        </p>
+        <p class="h6-style text-justify">
+          Scopul PIF este de a verifica dacă întregul sistem funcționează corect, în condiții de siguranță și conform
+          normelor. După punerea în funcțiune, este obligatorie Admiterea Funcționării (AF), adică verificarea centralei
+          și luarea în evidență ISCIR.
+        </p>
+        <p class="h6-style text-justify mb-0">
+          În cadrul PIF se verifică racordarea centralei la instalația de încălzire, apă rece, apă caldă, gaz, energie
+          electrică și tubulatura de evacuare a gazelor. Se efectuează reglajele necesare astfel încât să fie satisfăcute
+          cerințele de funcționare în condiții de siguranță conform legislației în vigoare.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alerte -->
+  <section class="row g-4 mb-5">
+    <div class="col-md-6">
+      <div class="alert alert-warning shadow-sm h-100 mb-0">
+        <h6 class="fw-bold mb-2"><i class="bi bi-exclamation-triangle-fill me-2"></i> ATENȚIE!</h6>
+        <p class="mb-0 small">
+          Admiterea Funcționării / Autorizația ISCIR (AF) este obligatorie la punerea în funcțiune a centralei și se facturează
+          suplimentar față de costul echipamentului.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="alert alert-success shadow-sm h-100 mb-0">
+        <h6 class="fw-bold mb-2"><i class="bi bi-patch-check-fill me-2"></i> GARANȚIA</h6>
+        <p class="mb-0 small">
+          Piesele de schimb utilizate sunt originale și beneficiază de garanție 24 luni. Pentru manoperă se acordă garanție
+          de 3 luni.
+        </p>
+      </div>
+    </div>
+  </section>
+
+<!-- Acte necesare -->
+<section class="mb-5">
+  <div class="card shadow-sm border-0 bg-light">
+    <div class="card-body p-4">
+      <h4 class="fw-bold text-secondary mb-4">
+        <i class="bi bi-file-earmark-text-fill text-primary me-2"></i> Acte necesare la P.I.F.
+      </h4>
+      <ul class="list-unstyled h6-style">
+        <li class="mb-3">
+          <i class="bi bi-receipt-cutoff text-primary me-2"></i>
+          Factura de achiziție a centralei termice
+        </li>
+        <li class="mb-3">
+          <i class="bi bi-diagram-3-fill text-success me-2"></i>
+          Proiectul de gaz (în care poziționarea pe plan să corespundă montajului în șantier)
+        </li>
+        <li class="mb-3">
+          <i class="bi bi-journal-check text-warning me-2"></i>
+          Procesul verbal de punere în funcțiune a instalației de gaz
+        </li>
+        <li class="mb-3">
+          <i class="bi bi-book text-info me-2"></i>
+          Documentația tehnică a centralei, predată la achiziție
+        </li>
+        <li>
+          <i class="bi bi-award-fill text-danger me-2"></i>
+          Certificatul de garanție al centralei termice
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- Prețuri PIF -->
+<section class="mb-5">
+  <div class="card shadow-sm border-0 bg-light">
+    <div class="card-body">
+      <h4 class="fw-bold text-primary mb-3">
+        <i class="bi bi-cash-coin me-2"></i> Prețuri Punere în Funcțiune (PIF) centrală termică
+      </h4>
+      <p class="h6-style text-muted fst-italic mb-3">
+        ** Punerea în funcțiune a centralei termice vă este oferită <span class="fw-bold text-success">GRATUIT</span>, 
+        dumneavoastră va trebui să achitați doar costul Autorizației ISCIR.
+      </p>
+
+      <p class="h6-style"><strong>Puteri mai mici de 36kW</strong></p>
+
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-hover align-middle shadow-sm">
+          <thead class="table-primary">
+            <tr>
+              <th>SERVICIU</th>
+              <th class="text-center">PREȚ</th>
+            </tr>
+          </thead>
+
+                  <tbody>
+                    {% for p in preturi_standard %}
+                    <tr>
+                      <td><p class="h6-style mb-0">{{ p.denumire }}</p></td>
+                      <td class="text-center fw-semibold">
+                        <p class="h6-style mb-0">
+                          {{ p.pret }} lei{% if p.um %}/{{ p.um }}{% endif %}
+                        </p>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+        </table>
+      </div>
+
+      <p class="mt-3 h6-style text-muted fst-italic">
+        Pentru putere mai mare de 36kW a centralei termice se realizează ofertă personalizată.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+</div>
+
+{% bootstrap_javascript %}
+</body>
+</html>
