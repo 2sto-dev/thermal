@@ -11,6 +11,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
     path("admin/login/", custom_login, name="custom_login"),
     path("", include("solicitari.urls")),
     path("adrese/", include("adrese.urls")),
@@ -20,7 +21,9 @@ urlpatterns = [
     path("solicitari/", include("solicitari.urls")),
     path("centrale_termice/", centrale_termice_view, name="centrale_termice"),  
     path("aer_conditionat/", aer_conditionat_view, name="aer_conditionat"),
-    path("aer_conditionat/<slug:slug>/", serviciu_detail_clima_view, name="serviciu_detail_clima"), 
+    path("aer_conditionat/<slug:slug>/", serviciu_detail_clima_view, name="serviciu_detail_clima"),
+
+ 
 ]
 
 if settings.DEBUG:
