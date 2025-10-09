@@ -1,0 +1,55 @@
+<!-- GDPR bar + bulină chatbot: bară până la accept, apoi bulină roz (dreapta jos) -->
+<div id="gdpr-consent" class="gdpr-consent" style="display:none;">
+  <div class="gdpr-bar py-3">
+    <div class="container">
+      <div class="row align-items-center g-2">
+        <div class="col-12 col-lg">
+          <small class="text-muted">
+            Folosim cookie-uri pentru a-ți îmbunătăți experiența. Continuând, ești de acord cu
+            <a href="/politica-gdpr" class="link-primary text-decoration-none">Politica de confidențialitate (GDPR)</a>.
+          </small>
+        </div>
+        <div class="col-12 col-lg-auto d-flex gap-2 justify-content-lg-end">
+          <button id="gdpr-accept" class="btn btn-success btn-sm rounded-pill px-3">
+            <i class="bi bi-check2-circle me-1"></i> Accept
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="chatbot-pillow" type="button" class="chat-bubble" title="ChatBot" aria-label="ChatBot" style="display:none;">
+  <i class="bi bi-chat-dots-fill"></i>
+</button>
+
+<script>
+(function() {
+  const key = 'gdprAccepted';
+  const bar = document.getElementById('gdpr-consent');
+  const btn = document.getElementById('gdpr-accept');
+  const bubble = document.getElementById('chatbot-pillow');
+
+  function showBar() { if (bar) bar.style.display = 'block'; if (bubble) bubble.style.display = 'none'; }
+  function showBubble() { if (bar) bar.style.display = 'none'; if (bubble) bubble.style.display = 'inline-flex'; }
+
+  try {
+    if (localStorage.getItem(key)) showBubble(); else showBar();
+  } catch(_) { showBar(); }
+
+  if (btn) {
+    btn.addEventListener('click', () => {
+      try { localStorage.setItem(key, '1'); } catch(_) {}
+      showBubble();
+    });
+  }
+
+  if (bubble) {
+    bubble.addEventListener('click', () => {
+      document.dispatchEvent(new CustomEvent('bbinstall:open-chat'));
+      const t = document.getElementById('bb-chat-toggle');
+      if (t) try { t.click(); } catch(_) {}
+    });
+  }
+})();
+</script>

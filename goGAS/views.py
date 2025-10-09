@@ -22,4 +22,5 @@ def formular_view(request):
     return render(request, "formular.html", {"beneficiari": beneficiari})
 
 def centrale_termice_view(request):
-    return render(request, 'partials/centrale_termice.html')
+    return render(request, 'partials/centrale-termice.html')
+

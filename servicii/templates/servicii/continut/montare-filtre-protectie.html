@@ -5,7 +5,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Filtre de Protecție - BBINSTALL{% endblock %}</title>
+    <title>{% block title %}Montare filtre protecție – Drobeta‑Turnu Severin | BBINSTALL{% endblock %}</title>
+  
+
 
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
@@ -13,31 +15,19 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
   <!-- Fonturi -->
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/typography.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
+
 
   <style>
-    body {
-      font-family: "Lora", serif;
-      line-height: 1.6;
-    }
-    h2, h4, h5, h6 {
-      font-family: "Merriweather", serif;
-      font-weight: 700;
-    }
-    p.h6-style {
-      font-family: "Merriweather", serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    section {
-      margin-bottom: 2rem;
-    }
   </style>
+
 </head>
 
-<body>
+<body class="bg-light">
+
 <div class="container py-5">
 
   <!-- Secțiune introductivă -->
@@ -56,18 +46,20 @@
       </ul>
     </div>
     <div class="col-lg-4 text-center">
-      <img src="/media/filtru.webp" alt="Filtru protecție"
+            <img src="{{ MEDIA_URL }}filtru.webp" alt="Filtru protecție"
            class="img-fluid rounded shadow-sm"
-           style="max-width: 85%; height: auto;">
+           style="max-width: 85%; height: auto;" loading="lazy" width="600" height="400">
+
     </div>
   </section>
 
   <!-- Filtru Y -->
   <section class="row align-items-center mb-5">
     <div class="col-lg-4 text-center">
-      <img src="/media/filtru-y.jpeg" alt="Filtru Y"
+            <img src="{{ MEDIA_URL }}filtru-y.jpeg" alt="Filtru Y"
            class="img-fluid rounded shadow-sm"
-           style="max-width: 85%; height: auto;">
+           style="max-width: 85%; height: auto;" loading="lazy" width="600" height="400">
+
     </div>
     <div class="col-lg-8">
       <h5>
@@ -109,18 +101,20 @@
       </ul>
     </div>
     <div class="col-lg-4 text-center">
-      <img src="/media/montaj-filtre.png" alt="Filtru Antimagnetită"
+            <img src="{{ MEDIA_URL }}montaj-filtre.png" alt="Filtru Antimagnetită"
            class="img-fluid rounded shadow-sm"
-           style="max-width: 85%; height: auto;">
+           style="max-width: 85%; height: auto;" loading="lazy" width="600" height="400">
+
     </div>
   </section>
 
   <!-- Întreținere Filtru Antimagnetită -->
   <section class="row align-items-center mb-5">
     <div class="col-lg-4 text-center">
-      <img src="/media/antimagnetita.avif" alt="Întreținere Filtru Antimagnetită"
+            <img src="{{ MEDIA_URL }}antimagnetita.avif" alt="Întreținere Filtru Antimagnetită"
            class="img-fluid rounded shadow-sm"
-           style="max-width: 85%; height: auto;">
+           style="max-width: 85%; height: auto;" loading="lazy" width="600" height="400">
+
     </div>
     <div class="col-lg-8">
       <h5>Întreținere și recomandări</h5>
@@ -162,6 +156,10 @@
     </div>
   </section>
 
+  {% include "partials/_cta_floating.html" %}
 </div>
+{% bootstrap_javascript %}
 </body>
 </html>
+
+

@@ -1,0 +1,41 @@
+{% comment %}
+Parametri:
+- titlu: string (ex: "Prețuri montaj standard")
+- preturi: queryset/list
+- empty_text: fallback text (opțional)
+{% endcomment %}
+<div class="card shadow-sm border-0 h-100">
+  <div class="card-body">
+    <h4 class="fw-bold mb-4 text-secondary">
+      <i class="bi bi-cash-coin text-primary me-2"></i> {{ titlu }}
+    </h4>
+    {% if preturi %}
+    <div class="table-responsive">
+      <table class="table table-sm table-striped table-hover align-middle shadow-sm pricing-table">
+        <thead>
+          <tr>
+            <th>Serviciu</th>
+            <th class="text-center">Preț</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in preturi %}
+          <tr>
+            <td><p class="h6-style mb-0">{{ p.denumire }}</p></td>
+            <td class="text-center fw-semibold">
+              <span class="badge bg-white text-dark fs-6 shadow-sm px-3 py-2">
+                {{ p.pret }} lei{% if p.um %} <span class="badge badge-um ms-1">/{{ p.um }}</span>{% endif %}
+              </span>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info shadow-sm">
+      {{ empty_text|default:"Nu există prețuri definite pentru acest serviciu." }}
+    </div>
+    {% endif %}
+  </div>
+</div>

@@ -1,5 +1,28 @@
 from django.shortcuts import render, get_object_or_404
+from django.templatetags.static import static
 from .models import Serviciu
+
+
+def _ensure_seo_context(request, context, default_desc: str):
+    """Completează contextul cu seo_title, seo_description și og_image dacă lipsesc."""
+    if "seo_title" not in context:
+        serviciu = context.get("serviciu_selectat")
+        if serviciu:
+            title = getattr(serviciu, "meta_title", None) or getattr(serviciu, "titlu", "Serviciu")
+            desc = getattr(serviciu, "meta_description", None) or default_desc
+            context.update({
+                "seo_title": f"{title} - BBINSTALL",
+                "seo_description": desc,
+                "og_image": request.build_absolute_uri(static("img/og-default.jpg")),
+            })
+        else:
+            context.update({
+                "seo_title": "BBINSTALL – Servicii termice și climatizare",
+                "seo_description": default_desc,
+                "og_image": request.build_absolute_uri(static("img/og-default.jpg")),
+            })
+    return context
+
 
 
 def servicii_home(request):
@@ -24,13 +47,25 @@ def centrale_termice_view(request):
         preturi_standard = serviciu_selectat.preturi.filter(categorie="standard")
         preturi_suplimentare = serviciu_selectat.preturi.filter(categorie="suplimentar")
 
-    return render(request, "partials/centrale_termice.html", {
+    context = {
         "servicii_termice": servicii_termice,
         "serviciu_selectat": serviciu_selectat,
         "preturi_standard": preturi_standard,
         "preturi_suplimentare": preturi_suplimentare,
         "template_content": f"servicii/continut/{serviciu_selectat.slug}.html" if serviciu_selectat else None,
-    })
+    }
+    if serviciu_selectat:
+        context.update({
+            "page_title": serviciu_selectat.meta_title or serviciu_selectat.titlu,
+            "meta_description": serviciu_selectat.meta_description,
+            "meta_keywords": serviciu_selectat.meta_keywords,
+        })
+
+    context = _ensure_seo_context(request, context, "Servicii centrale termice în Drobeta-Turnu Severin. Prețuri și detalii.")
+    return render(request, "partials/centrale-termice.html", context)
+
+
+
 
 
 def serviciu_detail_view(request, slug):
@@ -41,13 +76,23 @@ def serviciu_detail_view(request, slug):
     preturi_standard = serviciu_selectat.preturi.filter(categorie="standard")
     preturi_suplimentare = serviciu_selectat.preturi.filter(categorie="suplimentar")
 
-    return render(request, "partials/centrale_termice.html", {
+    context = {
         "servicii_termice": servicii_termice,
         "serviciu_selectat": serviciu_selectat,
         "preturi_standard": preturi_standard,
         "preturi_suplimentare": preturi_suplimentare,
         "template_content": f"servicii/continut/{slug}.html",
+    }
+    context.update({
+        "page_title": serviciu_selectat.meta_title or serviciu_selectat.titlu,
+        "meta_description": serviciu_selectat.meta_description,
+        "meta_keywords": serviciu_selectat.meta_keywords,
     })
+    context = _ensure_seo_context(request, context, "Servicii centrale termice în Drobeta-Turnu Severin. Prețuri și detalii.")
+    return render(request, "partials/centrale-termice.html", context)
+
+
+
 
 
 def serviciu_detail_clima_view(request, slug):
@@ -58,13 +103,23 @@ def serviciu_detail_clima_view(request, slug):
     preturi_standard = serviciu_selectat.preturi.filter(categorie="standard")
     preturi_suplimentare = serviciu_selectat.preturi.filter(categorie="suplimentar")
 
-    return render(request, "partials/aer_conditionat.html", {
+    context = {
         "servicii_clima": servicii_clima,
         "serviciu_selectat": serviciu_selectat,
         "preturi_standard": preturi_standard,
         "preturi_suplimentare": preturi_suplimentare,
         "template_content": f"servicii/continut/{slug}.html",
+    }
+    context.update({
+        "page_title": serviciu_selectat.meta_title or serviciu_selectat.titlu,
+        "meta_description": serviciu_selectat.meta_description,
+        "meta_keywords": serviciu_selectat.meta_keywords,
     })
+    context = _ensure_seo_context(request, context, "Servicii aer condiționat în Drobeta-Turnu Severin. Prețuri și detalii.")
+    return render(request, "partials/aer-conditionat.html", context)
+
+
+
 
 
 def aer_conditionat_view(request):
@@ -80,10 +135,22 @@ def aer_conditionat_view(request):
         preturi_standard = serviciu_selectat.preturi.filter(categorie="standard")
         preturi_suplimentare = serviciu_selectat.preturi.filter(categorie="suplimentar")
 
-    return render(request, "partials/aer_conditionat.html", {
+    context = {
         "servicii_clima": servicii_clima,
         "serviciu_selectat": serviciu_selectat,
         "preturi_standard": preturi_standard,
         "preturi_suplimentare": preturi_suplimentare,
         "template_content": f"servicii/continut/{serviciu_selectat.slug}.html" if serviciu_selectat else None,
-    })
+    }
+    if serviciu_selectat:
+        context.update({
+            "page_title": serviciu_selectat.meta_title or serviciu_selectat.titlu,
+            "meta_description": serviciu_selectat.meta_description,
+            "meta_keywords": serviciu_selectat.meta_keywords,
+        })
+
+    context = _ensure_seo_context(request, context, "Servicii aer condiționat în Drobeta-Turnu Severin. Prețuri și detalii.")
+    return render(request, "partials/aer-conditionat.html", context)
+
+
+

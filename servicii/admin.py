@@ -21,9 +21,14 @@ class ServiciuAdmin(admin.ModelAdmin):
             "fields": ("titlu", "slug", "categorie", "activ"),
             "description": "Detalii de bază despre serviciu."
         }),
+        ("SEO", {
+            "fields": ("meta_title", "meta_description", "meta_keywords"),
+            "description": "Titlu/meta description/keywords pentru SEO. Lăsate necompletate, se folosesc fallback-uri."
+        }),
     )
 
     inlines = [PretServiciuInline]
+
 
 
 @admin.register(PretServiciu)

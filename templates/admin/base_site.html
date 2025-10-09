@@ -1,0 +1,19 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}BBINSTALL Admin{% endblock %}
+
+{% block branding %}
+  <h1 id="site-name" class="m-0" style="width:100%; text-align:center; font-weight:700; letter-spacing:1px;">
+    <a href="{% url 'admin:index' %}" style="color:#fff; text-decoration:none;">BBINSTALL</a>
+  </h1>
+{% endblock %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <style>
+    /* Centrare și text alb, fără bandă de culoare suplimentară */
+    #site-name, #site-name a { color:#fff !important; }
+    .header { justify-content: center; }
+  </style>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% comment %} Include SEO meta tags. Expects in context: seo_title, seo_description, og_image(optional) {% endcomment %}
+{% load static %}
+{% static 'img/og-default.jpg' as og_default %}
+<title>{{ seo_title|default:"Servicii termice și climatizare - BBINSTALL" }}</title>
+<meta name="description" content="{{ seo_description|default:'Montaj, verificare, revizie, igienizare aer condiționat și centrale termice în Drobeta-Turnu Severin.' }}">
+<link rel="canonical" href="{{ request.build_absolute_uri|escape }}">
+<meta property="og:title" content="{{ og_title|default:seo_title }}">
+<meta property="og:description" content="{{ og_description|default:seo_description }}">
+<meta property="og:url" content="{{ request.build_absolute_uri|escape }}">
+<meta property="og:image" content="{{ og_image|default:og_default }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ro_RO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

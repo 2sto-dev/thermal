@@ -1,0 +1,20 @@
+{# SEO meta partial - include this inside <head> #}
+{% load static %}
+
+{# Title remains from page <title>; we provide OG/Twitter meta #}
+<meta name="description" content="{{ meta_description|default:'Service autorizat în Drobeta‑Turnu Severin: reparații centrale termice, verificare tehnică ISCIR, revizii, montaj aer condiționat. Programează rapid intervenția!' }}">
+<meta name="keywords" content="{{ meta_keywords|default:'reparații centrale termice, verificare tehnică ISCIR, revizie centrală, punere în funcțiune, montare termostat, montare filtre protecție, montaj aer condiționat, igienizare aer condiționat, revizie aer condiționat, Drobeta-Turnu Severin' }}">
+<meta name="author" content="BBINSTALL Organization SRL">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ canonical_url|default:request.build_absolute_uri }}">
+
+<meta property="og:title" content="{{ meta_title|default:meta_fallback_title|default:'BBINSTALL – Service centrale termice și aer condiționat' }}">
+<meta property="og:description" content="{{ meta_description|default:'Service autorizat în Drobeta‑Turnu Severin: reparații centrale termice, verificare ISCIR, revizii, montaj AC.' }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:image" content="{{ og_image|default:'/media/reparatii-centrale.png' }}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta_title|default:meta_fallback_title|default:'BBINSTALL – Service centrale termice și aer condiționat' }}">
+<meta name="twitter:description" content="{{ meta_description|default:'Service autorizat în Drobeta‑Turnu Severin: reparații centrale termice, verificare ISCIR, revizii, montaj AC.' }}">
+<meta name="twitter:image" content="{{ og_image|default:'/media/reparatii-centrale.png' }}">

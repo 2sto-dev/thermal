@@ -1,0 +1,20 @@
+{% comment %} Expects: serviciu_selectat, preturi_standard {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "{{ serviciu_selectat.titlu|default:'Serviciu' }}",
+  "serviceType": "{{ serviciu_selectat.categorie|default:'serviciu' }}",
+  "provider": {"@type":"HVACBusiness","name":"B.B. Install"},
+  "areaServed": "Drobeta-Turnu Severin",
+  "offers": [
+    {% for p in preturi_standard %}{
+      "@type":"Offer",
+      "name":"{{ p.denumire|escape }}",
+      "price":"{{ p.pret }}",
+      "priceCurrency":"RON",
+      "availability":"https://schema.org/InStock"
+    }{% if not forloop.last %},{% endif %}{% endfor %}
+  ]
+}
+</script>

@@ -1,0 +1,25 @@
+/* Fonturi tipografice comune pentru paginile de servicii */
+
+body {
+  font-family: "Lora", serif;
+  line-height: 1.6;
+}
+
+h1, h2, h4, h5, h6 {
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+}
+
+/* Paragrafe stil h6 folosite în conținut */
+p.h6-style {
+  font-family: "Merriweather", serif;
+  font-size: 1rem; /* dimensiunea lui h6 */
+  font-weight: 700;
+  margin-bottom: 1rem; /* spațiu mai mare */
+  line-height: 1.6;
+}
+
+/* Spațiere între secțiuni */
+section {
+  margin-bottom: 2rem;
+}

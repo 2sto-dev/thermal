@@ -1,11 +1,10 @@
 {% load django_bootstrap5 %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ro">
-<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Montaj Aer Condiționat - BBINSTALL{% endblock %}</title>
+    <title>{% block title %}Montaj aer condiționat – Drobeta‑Turnu Severin | BBINSTALL{% endblock %}</title>
+  
+
 
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
@@ -13,31 +12,16 @@
 
   {% bootstrap_css %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/typography.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
   
   <style>
-    body {
-      font-family: "Lora", serif;
-      line-height: 1.6;
-    }
-    h1, h2, h4, h5, h6 {
-      font-family: "Merriweather", serif;
-      font-weight: 700;
-    }
-    p.h6-style {
-      font-family: "Merriweather", serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-    section {
-      margin-bottom: 2rem;
-    }
-      /* Carduri personalizate */
+      /* Carduri personalizate (specifice paginii, restul în components.css) */
   .custom-card {
+
     border: none;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9f5ff 100%);
     border-radius: 12px;
@@ -60,9 +44,6 @@
 
 
 </style>
-</head>
-
-<body class="bg-light">
 
   <div class="container py-1">
 
@@ -142,10 +123,12 @@
       
       <!-- Logouri jos -->
       <div class="d-flex justify-content-center align-items-center flex-wrap mt-4">
-        <img src="/media/daikin.png" alt="Daikin" class="mx-3" style="height:90px;">
-        <img src="/media/gree.png" alt="Gree" class="mx-3" style="height:90px;">
-        <img src="/media/midea.png" alt="Midea" class="mx-3" style="height:90px;">
-        <img src="/media/mitsubishi.png" alt="Mitsubishi" class="mx-3" style="height:90px;">
+                <img src="{{ MEDIA_URL }}daikin.png" alt="Daikin" class="mx-3" style="height:90px;" loading="lazy" width="160" height="90">
+        <img src="{{ MEDIA_URL }}gree.png" alt="Gree" class="mx-3" style="height:90px;" loading="lazy" width="160" height="90">
+        <img src="{{ MEDIA_URL }}midea.png" alt="Midea" class="mx-3" style="height:90px;" loading="lazy" width="160" height="90">
+        <img src="{{ MEDIA_URL }}mitsubishi.png" alt="Mitsubishi" class="mx-3" style="height:90px;" loading="lazy" width="160" height="90">
+        
+
         
       </div>
 
@@ -204,37 +187,17 @@
 
        
         <!-- Card Prețuri standard -->
-        <div class="col-12 col-lg-6">
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h4 class="fw-bold mb-4"><i class="bi bi-cash-coin me-2 text-primary"></i> Prețuri montaj standard</h4>
-              <div class="table-responsive">
-                <table class="table table-sm table-striped table-hover align-middle shadow-sm">
-                  <thead class="table-primary">
-                    <tr>
-                      <th>Serviciu</th>
-                      <th class="text-center">Preț</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for p in preturi_standard %}
-                    <tr>
-                      <td><p class="h6-style mb-0">{{ p.denumire }}</p></td>
-                      <td class="text-center fw-semibold">
-                        <p class="h6-style mb-0">
-                          {{ p.pret }} lei{% if p.um %}/{{ p.um }}{% endif %}
-                        </p>
-                      </td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-              <p class="h6-style fst-italic mt-3">Pentru modele complexe sau sisteme smart, prețul se stabilește în funcție de specificații.</p>
-              <p class="mt-2 text-muted fst-italic small">Prețurile sunt finale și nu sunt purtătoare de TVA.</p>
+                <div class="col-12 col-lg-6">
+                    {% include "partials/_pricing_table.html" with titlu="Prețuri montaj standard" preturi=preturi_standard empty_text="Nu există prețuri definite pentru acest serviciu." %}
+          <div class="card shadow-sm border-0 mt-2">
+            <div class="card-body py-2">
+              <p class="text-muted fst-italic mb-2">Pentru modele complexe sau sisteme smart, prețul se stabilește în funcție de specificații.</p>
+              <p class="text-muted fst-italic small mb-0">Prețurile sunt finale și nu sunt purtătoare de TVA.</p>
             </div>
           </div>
         </div>
+
+
       </div>
     </section>
 
@@ -312,7 +275,6 @@
 
   </div>
 
-  {% bootstrap_javascript %}
-  <script src="{% static 'js/main.js' %}"></script>
-</body>
-</html>
+  {% include "partials/_cta_floating.html" %}
+
+  

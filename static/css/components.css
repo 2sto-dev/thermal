@@ -1,0 +1,94 @@
+/* Componente UI comune pentru paginile de servicii */
+
+/* Carduri personalizate */
+.custom-card {
+  border: none;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9f5ff 100%);
+  border-radius: 12px;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+.custom-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 18px rgba(0, 162, 255, 0.22);
+}
+.custom-card i { transition: transform 0.25s ease-in-out; }
+.custom-card:hover i { transform: scale(1.06); }
+
+/* Conținut în card: lizibilitate pe mobil */
+.card-text p,
+.card-text li { line-height: 1.7; }
+.card-text img { max-width: 100%; height: auto; }
+.card-text h1,
+.card-text h2,
+.card-text h3,
+.card-text h4,
+.card-text h5,
+.card-text h6 { text-align: left; }
+
+/* Tabele prețuri */
+.pricing-table thead { background: #e9f2ff; }
+.pricing-table th, .pricing-table td { vertical-align: middle; }
+.badge-um {
+  background: #eef4ff;
+  color: #1f3b77;
+  border: 1px solid #d7e6ff;
+}
+
+/* Îmbunătățiri pe ecrane mici */
+@media (max-width: 576px) {
+  .card-text { font-size: 1rem; }
+  .card-text p,
+  .card-text li { text-align: left; }
+  .btn-lg { padding: .5rem 1rem; font-size: 1rem; }
+  .pricing-table { font-size: .95rem; }
+}
+
+/* Secțiune tip Hero scurtă */
+.hero-serviciu {
+  background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+  color: #fff;
+  border-radius: 12px;
+}
+
+/* GDPR consent bar (transparent, elegant) */
+.gdpr-consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 1050; }
+.gdpr-bar {
+  background: rgba(220, 252, 231, 0.9); /* verde deschis, translucid */
+  backdrop-filter: saturate(140%) blur(6px);
+  border-top: 1px solid rgba(25,135,84,0.25); /* nuanță success */
+  box-shadow: 0 -8px 24px rgba(25,135,84,0.18);
+}
+.gdpr-bar .btn { box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.gdpr-bar .btn-outline-secondary { border-color: rgba(108,117,125,0.6); color: #6c757d; }
+.gdpr-bar .btn-outline-secondary:hover { background: rgba(108,117,125,0.08); }
+
+/* Utilitare mobile */
+.text-justify-mobile { }
+@media (max-width: 576px) {
+  .gdpr-bar .btn { width: 100%; }
+  .text-justify-mobile { text-align: justify; }
+  .btn-lg { padding: .5rem 1rem; font-size: 1rem; }
+  .pricing-table { font-size: .95rem; }
+}
+
+/* Bulină chatbot după accept: roz, în dreapta jos */
+.chat-bubble {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1050;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #ff4da6 0%, #ff7fc1 100%);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 18px rgba(255, 77, 166, 0.35);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.chat-bubble:hover { transform: translateY(-2px); box-shadow: 0 12px 22px rgba(255, 77, 166, 0.45); }
+.chat-bubble i { font-size: 1.35rem; line-height: 1; }

@@ -12,8 +12,14 @@ class Serviciu(models.Model):
     categorie = models.CharField("Categorie", max_length=10, choices=CATEGORII)
     activ = models.BooleanField("Activ", default=True)
 
+    # SEO
+    meta_title = models.CharField("Meta Title", max_length=160, blank=True, null=True)
+    meta_description = models.CharField("Meta Description", max_length=180, blank=True, null=True)
+    meta_keywords = models.CharField("Meta Keywords", max_length=255, blank=True, null=True)
+
     def __str__(self):
         return self.titlu
+
 
 class PretServiciu(models.Model):
     CATEGORII = [

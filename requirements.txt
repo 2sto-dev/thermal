@@ -1,4 +1,4 @@
-adrese @ git+https://github.com/2sto-dev/adrese.git@50a66324caac1852a790433f37df4968597026ff
+#adrese @ git+https://github.com/2sto-dev/adrese.git@50a66324caac1852a790433f37df4968597026ff
 asgiref==3.9.1
 asttokens==3.0.0
 attrs==25.3.0
@@ -16,7 +16,7 @@ Django==5.2.4
 django-admin-interface==0.30.1
 django-autocomplete-light==3.12.1
 django-bootstrap5==25.2
-django-ckeditor-5==0.2.18
+
 django-colorfield==0.14.0
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.1

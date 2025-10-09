@@ -102,13 +102,17 @@
           <h2 class="fw-bold d-flex align-items-center border-bottom border-3 border-dark pb-2 mb-4">
             <i class="bi bi-tools me-2 text-dark"></i>{{ serviciu_selectat.titlu }}
           </h2>
-          <div class="card-text">
+                    <div class="card-text">
             {% if template_content %}
               {% include template_content %}
+              {% if serviciu_selectat and preturi_standard %}
+                {% include 'partials/_ld_service.html' %}
+              {% endif %}
             {% else %}
               <p>Conținutul pentru acest serviciu nu este încă disponibil.</p>
             {% endif %}
           </div>
+
         </article>
       </div>
       {% else %}

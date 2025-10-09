@@ -87,11 +87,15 @@
             <i class="bi bi-tools me-2 text-dark"></i>{{ serviciu_selectat.titlu }}
           </h2>
           <div class="card-text">
-            {% if template_content %}
+                        {% if template_content %}
               {% include template_content %}
+              {% if serviciu_selectat and preturi_standard %}
+                {% include 'partials/_ld_service.html' %}
+              {% endif %}
             {% else %}
               <p>Conținutul pentru acest serviciu nu este încă disponibil.</p>
             {% endif %}
+
           </div>
         </article>
       </div>
@@ -102,4 +106,3 @@
 
   </div>
 </div>
-git add 
