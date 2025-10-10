@@ -30,6 +30,10 @@ section {
     text-align: justify;
     hyphens: auto;
     -webkit-hyphens: auto;
+    letter-spacing: 0.2px;
   }
-  .lead { text-align: justify; }
+  .lead {
+    text-align: justify;
+    letter-spacing: 0.2px;
+  }
 }

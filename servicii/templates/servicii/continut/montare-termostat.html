@@ -5,10 +5,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Montare termostat – Drobeta‑Turnu Severin | BBINSTALL{% endblock %}</title>
-  {% with meta_title="Montare termostat – Drobeta‑Turnu Severin | BBINSTALL" meta_description="Montare termostate wireless sau smart pentru confort și eficiență energetică. Servicii rapide în Drobeta‑Turnu Severin." meta_keywords="montare termostat, termostat wireless, termostat smart, Drobeta‑Turnu Severin, BBINSTALL" %}
-  {% include 'partials/_seo_meta.html' %}
-  {% endwith %}
+    <title>{% block title %}Montare termostat – Drobeta‑Turnu Severin | BBINSTALL{% endblock %}</title>
+
 
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
@@ -28,7 +26,7 @@
 </head>
 
 <body class="bg-light">
-<div class="container py-5">
+<div class="container py-3">
 
   <!-- Titlu + descriere -->
   <section class="row align-items-center mb-5">
@@ -54,8 +52,9 @@
 
   <!-- Prețuri -->
 <section class="mb-5">
-  {% include "partials/_pricing_table.html" with titlu="Prețuri "|add:serviciu_selectat.titlu preturi=preturi_standard empty_text="Nu există prețuri definite." %}
+  {% include "partials/_pricing_table.html" with titlu="Prețuri montare termostat" preturi=preturi_standard empty_text="Nu există prețuri definite." %}
   <div class="card shadow-sm border-0 mt-2">
+
     <div class="card-body py-2">
       <p class="text-muted fst-italic small mb-0">
         Pentru modele complexe sau sisteme smart, prețul se stabilește în funcție de specificații.
@@ -89,9 +88,12 @@
   </section>
 
 
+
+
+</div>
 {% include "partials/_cta_floating.html" %}
 {% bootstrap_javascript %}
-</div>
-
+<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
+

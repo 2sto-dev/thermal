@@ -1,8 +1,5 @@
-<div class="container-fluid py-5 bg-white text-dark">
-  <div class="row">
-
-    <!-- Sidebar -->
-    <aside class="col-lg-3 mb-4 sidebar px-lg-4 bg-white rounded-3 shadow-sm">
+<!-- Sidebar -->
+    <aside class="col-lg-3 mb-4 sidebar px-lg-4" style="background-color:#EBF4FA; color:#333;">
 
       <!-- Titlu Sidebar -->
       <div class="mb-4 mt-4">
@@ -19,8 +16,9 @@
         </div>
         <ul class="list-group list-group-flush">
           {% for serviciu in servicii_clima %}
-            <li class="list-group-item px-3 py-2 border-bottom"
-                style="border-bottom:2px solid #dee2e6 !important;">
+                        <li class="list-group-item px-3 py-2 border-bottom"
+                style="background-color:#f7f6f6; border-bottom:2px solid #dee2e6 !important;">
+
               <a href="{% url 'serviciu_detail_clima' serviciu.slug %}"  
                  class="d-flex align-items-center text-decoration-none {% if serviciu_selectat and serviciu.slug == serviciu_selectat.slug %}fw-bold text-primary{% else %}text-dark{% endif %}">
                 <i class="bi bi-chevron-right me-2 {% if serviciu_selectat and serviciu.slug == serviciu_selectat.slug %}text-primary{% else %}text-secondary{% endif %}"></i>
@@ -43,19 +41,7 @@
         </div>
       </div>
 
-      <!-- Card Contact -->
-      <div class="card shadow-sm mb-3 border-0 bg-primary-subtle">
-        <div class="card-header fw-bold d-flex align-items-center"
-             style="background-color:#12447d; color:#fff;">
-          <i class="bi bi-telephone me-2"></i> Contact
-        </div>
-        <div class="card-body">
-          <p class="mb-1">📞 <span class="fw-semibold">+40 770 794 240</span></p>
-          <p class="mb-0">✉️ <span class="fw-semibold">office@bbinstall.ro</span></p>
-        </div>
-      </div>
-
-      <!-- Card Promoții -->
+            <!-- Card Promoții -->
       <div class="card shadow-sm mb-3 border-0 bg-primary-subtle">
         <div class="card-header fw-bold d-flex align-items-center"
              style="background-color:#12447d; color:#fff;">
@@ -81,14 +67,27 @@
         </div>      
       </div>
 
-      <!-- Card Hartă -->
+            <!-- Card Hartă -->
       <div class="card shadow-sm mb-3 border-0 bg-primary-subtle">
         <div class="card-header fw-bold d-flex align-items-center" 
              style="background-color:#12447d; color:#fff;">
           <i class="bi bi-geo-alt me-2"></i> Locația noastră
         </div>
         <div class="card-body p-0">
-          <div id="map" style="height:300px; width:100%; border-radius:0 0 .375rem .375rem;"></div>
+                    <div id="map-clima" style="height:300px; width:100%; border-radius:0 0 .375rem .375rem;"></div>
+
+        </div>
+      </div>
+
+      <!-- Card Contact -->
+      <div class="card shadow-sm mb-3 border-0 bg-primary-subtle">
+        <div class="card-header fw-bold d-flex align-items-center"
+             style="background-color:#12447d; color:#fff;">
+          <i class="bi bi-telephone me-2"></i> Contact
+        </div>
+        <div class="card-body">
+          <p class="mb-1">📞 <span class="fw-semibold">+40 770 794 240</span></p>
+          <p class="mb-0">✉️ <span class="fw-semibold">office@bbinstall.ro</span></p>
         </div>
       </div>
 
@@ -120,35 +119,4 @@
       {% endif %}
     </main>
 
-  </div>
-</div>
 
-<!-- Script Harta Google -->
-<script>
-  function initMap() {
-    const location = { lat: 44.638144, lng: 22.6542683 };
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 16,
-      center: location,
-    });
-    const marker = new google.maps.Marker({
-      position: location,
-      map: map,
-      title: "B.B. Install Organization S.R.L"
-    });
-    const infowindow = new google.maps.InfoWindow({
-      content: `<b>B.B. Install Organization S.R.L</b><br>
-                <a href="https://www.google.com/maps?q=44.638144,22.6542683" target="_blank">
-                  Vezi pe Google Maps
-                </a>`
-    });
-    marker.addListener("click", () => {
-      infowindow.open(map, marker);
-    });
-  }
-</script>
-
-<!-- Script Google Maps (cheia ta API obligatoriu aici) -->
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRRUOOsAafSZfVeMclwgJnAPE2-paqBx8&callback=initMap">
-  </script>

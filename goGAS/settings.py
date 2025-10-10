@@ -81,11 +81,13 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "django.template.context_processors.media",  # pentru MEDIA_URL
+                                "django.template.context_processors.media",  # pentru MEDIA_URL
+                "goGAS.context_processors.google_maps_api_key",
             ],
         },
     },
 ]
+
 
 # 📌 Configurare WSGI
 WSGI_APPLICATION = "goGAS.wsgi.application"
@@ -152,4 +154,8 @@ SIMPLE_JWT = {
 
 # 📌 Tip implicit pentru cheile primare
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Google Maps API Key (expus prin context processor)
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY", "")
+
 

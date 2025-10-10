@@ -23,3 +23,17 @@ p.h6-style {
 section {
   margin-bottom: 2rem;
 }
+
+/* Mobile global readability: justify body text on small screens */
+@media (max-width: 576px) {
+  p, li {
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    letter-spacing: 0.2px;
+  }
+  .lead {
+    text-align: justify;
+    letter-spacing: 0.2px;
+  }
+}
